@@ -1,0 +1,39 @@
+.dropdown-menu {
+    right: 0 !important;
+    left: none
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+.navbar-nav {
+    padding-right: 0;
+}
+
+.dropdown-menu {
+    top: 80% !important;
+}
+
+.nav-link {
+    padding: 10px 15px !important;
+}
+
+.navbar {
+    font-size: 12pt;
+}
+
+@media (max-width: 575px) {
+    .navbar{
+        direction: ltr !important;
+    }
+    #navigationBar {
+        display: none;
+    }
+}
+
+@media (min-width: 576px) {
+    .navbar{
+        direction: rtl !important;
+    }
+}

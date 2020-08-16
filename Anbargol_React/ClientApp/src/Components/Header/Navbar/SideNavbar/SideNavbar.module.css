@@ -1,0 +1,26 @@
+.side-nav {
+    height: 100%;
+    position: absolute;
+    width: 50%;
+    transition: 0.3s;
+    z-index: 999;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid rgb(189, 189, 189);
+}
+
+@media(max-width: 575px) {
+    #side-navbar {
+        direction: rtl !important;
+    }
+
+    .nav-link,
+    .nav-item,
+    .navbar-nav {
+        width: 100% !important;
+        display: block;
+    }
+
+    .dropdown:hover>.dropdown-menu {
+        display: block !important;
+    }
+}

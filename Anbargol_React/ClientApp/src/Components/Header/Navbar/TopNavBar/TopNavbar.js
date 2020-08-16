@@ -1,28 +1,33 @@
-import React from 'react';
-import { Nav } from 'reactstrap';
+import React, { Component } from 'react';
+import './TopNavbar.module.css';
+import SideNavar from '../SideNavbar/SideNavbar'
+import Wrapper from '../../../../Shared/Wrapper/Wrapper'
+import ShowButton from '../ShowButton/ShowButton';
+import NavBarItems from '../NavBarItems/NavBarItem';
 
-const Navbar = props => {
-    return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="#">Navbar</a>
-            <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <a className="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    )
+class Navbar extends Component {
+    state = {
+        showSideBar: false
+    }
+
+    handleShowSideBar = (e) => {
+        e === 'show'
+            ? this.setState({ showSideBar: true })
+            : this.setState({ showSideBar: false })
+    }
+
+    render() {
+        return (
+            <Wrapper>
+                <SideNavar close={this.handleShowSideBar} show={this.state.showSideBar} />
+                <nav className="sans navbar navbar-expand-sm navbar-light bg-light p-0">
+                    <ShowButton show={this.handleShowSideBar} />
+                    <ul className="navbar-nav" id="navigationBar">
+                        <NavBarItems />
+                    </ul>
+                </nav>
+            </Wrapper >
+        )
+    }
 }
 export default Navbar;
