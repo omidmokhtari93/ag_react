@@ -1,21 +1,21 @@
 @font-face {
     font-family: "sans";
-    src: url("../Fonts/IRANSans.woff2");
+    src: url("../fonts/IRANSans.woff2");
 }
 
 @font-face {
     font-family: "light_sans";
-    src: url("../Fonts/IRANSansWeb_Light.woff2");
+    src: url("../fonts/IRANSansWeb_Light.woff2");
 }
 
 @font-face {
     font-family: "medium_sans";
-    src: url("../Fonts/IRANSansWeb_Medium.woff2");
+    src: url("../fonts/IRANSansWeb_Medium.woff2");
 }
 
 @font-face {
     font-family: "bold_sans";
-    src: url("../Fonts/IRANSansWeb_Bold.woff2");
+    src: url("../fonts/IRANSansWeb_Bold.woff2");
 }
 
 .medium-sans {
@@ -51,10 +51,6 @@
 .sans-xxsmall {
     font-family: sans !important;
     font-size: 8px;
-}
-
-body {
-    background-color: rgb(230, 230, 230);
 }
 
 .rtl {

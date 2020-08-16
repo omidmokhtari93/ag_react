@@ -1,12 +1,11 @@
 {
-  "name": "Anbargol_React",
+  "name": "Anbargol",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
-    "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
     "react": "^16.0.0",
     "react-dom": "^16.13.1",
@@ -17,8 +16,7 @@
     "reactstrap": "^6.3.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "rimraf": "^2.6.2",
-    "sass-loader": "^9.0.3"
+    "rimraf": "^2.7.1"
   },
   "devDependencies": {
     "ajv": "^6.0.0",
