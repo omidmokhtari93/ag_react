@@ -4,7 +4,7 @@
     width: 50%;
     transition: 0.3s;
     z-index: 999;
-    background-color: rgb(235, 235, 235);
+    background-color: #f1f4f7;
     border: 1px solid rgb(189, 189, 189);
 }
 

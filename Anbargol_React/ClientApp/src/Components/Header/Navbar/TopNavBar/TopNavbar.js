@@ -4,6 +4,7 @@ import SideNavar from '../SideNavbar/SideNavbar'
 import Wrapper from '../../../../Shared/Wrapper/Wrapper'
 import ShowButton from '../ShowButton/ShowButton';
 import NavBarItems from '../NavBarItems/NavBarItem';
+import Logo from '../../../../UI/Logo/Logo';
 
 class Navbar extends Component {
     state = {
@@ -21,12 +22,13 @@ class Navbar extends Component {
             <Wrapper>
                 <SideNavar close={this.handleShowSideBar} show={this.state.showSideBar} />
                 <nav className="sans navbar navbar-expand-sm navbar-light bg-light p-0">
+                    {/* <Logo /> */}
                     <ShowButton show={this.handleShowSideBar} />
                     <ul className="navbar-nav" id="navigationBar">
                         <NavBarItems />
                     </ul>
                 </nav>
-            </Wrapper >
+            </Wrapper>
         )
     }
 }
