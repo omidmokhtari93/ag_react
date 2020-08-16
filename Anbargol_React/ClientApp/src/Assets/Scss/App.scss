@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "sans";
+    src: url("../Fonts/IRANSans.woff2");
+}
+
+@font-face {
+    font-family: "light_sans";
+    src: url("../Fonts/IRANSansWeb_Light.woff2");
+}
+
+@font-face {
+    font-family: "medium_sans";
+    src: url("../Fonts/IRANSansWeb_Medium.woff2");
+}
+
+@font-face {
+    font-family: "bold_sans";
+    src: url("../Fonts/IRANSansWeb_Bold.woff2");
+}
+
+.medium-sans {
+    font-family: medium_sans !important;
+    font-size: 12px;
+}
+
+.bold-sans {
+    font-family: bold_sans !important;
+    font-size: 12px;
+}
+
+.light-sans {
+    font-family: sans !important;
+    font-size: 12px;
+}
+
+.sans {
+    font-family: sans !important;
+    font-size: 12px;
+}
+
+.sans-small {
+    font-family: sans !important;
+    font-size: 10px;
+}
+
+.sans-xsmall {
+    font-family: sans !important;
+    font-size: 9px;
+}
+
+.sans-xxsmall {
+    font-family: sans !important;
+    font-size: 8px;
+}
+
+body {
+    background-color: rgb(230, 230, 230);
+}
+
+.rtl {
+    direction: rtl !important;
+}
+
+.ltr {
+    direction: ltr !important;
+}
+
+.no-resize {
+    resize: none !important;
+}
+
+.pointer {
+    cursor: pointer !important;
+}

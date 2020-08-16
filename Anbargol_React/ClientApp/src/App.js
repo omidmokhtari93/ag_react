@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import classes from './Assets/Css/app.module.css';
-import Navbar from './Components/Header/Navbar/Navbar';
+import Navbar from './Components/Header/Navbar/TopNavBar/TopNavbar';
+import Wrapper from './Shared/Wrapper/Wrapper';
 
 export default class App extends Component {
   render() {
     return (
-      <div className="container">
+      <Wrapper>
+        <div className="container sans">
         <Navbar />
-        123
-      </div>
+
+          تست
+        </div>
+      </Wrapper>
     );
   }
 }
