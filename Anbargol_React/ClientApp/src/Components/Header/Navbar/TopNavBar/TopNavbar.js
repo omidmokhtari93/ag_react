@@ -27,12 +27,9 @@ class Navbar extends Component {
                         <Logo />
                     </a>
                     <ul className="navbar-nav" id="navigationBar">
-                        <li className="nav-item">
-
-                        </li>
                         <NavBarItems />
                     </ul>
-                    <SearchBox width="30%"/>
+                    <SearchBox width="50%" placeholder="جستجوی گل" />
                     <ShowButton show={this.handleShowSideBar} />
                 </nav>
             </Wrapper>

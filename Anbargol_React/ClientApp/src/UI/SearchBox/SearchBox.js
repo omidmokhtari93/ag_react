@@ -7,15 +7,28 @@ import Loading from '../Loading/Loading';
 class SearchBox extends Component {
 
     render() {
-        console.log(this.props)
         return (
-            <div className="form-control form-control-sm search-box light-sans"
+            <div className="search-box light-sans"
                 style={this.props.width
                     ? { width: this.props.width }
                     : { width: '100%' }}>
-                <img src={searcIcon} className="search-icon"/>
-                <Loading show={false}/>
-                <input />
+                <img src={searcIcon} className="search-icon" />
+                <Loading show={true} />
+                <input placeholder={this.props.placeholder} />
+                <ul>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                    <li>گل شماره 1</li>
+                </ul>
             </div>
         )
     }

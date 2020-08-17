@@ -8,7 +8,7 @@ export default class App extends Component {
       <Wrapper>
         <Navbar />
         <div className="container sans">
-          
+          تست
         </div>
       </Wrapper>
     );

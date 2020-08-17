@@ -1,9 +1,9 @@
 .dropdown-menu {
     right: 0 !important;
-    left: none
+    left: none;
 }
 
-.dropdown:hover>.dropdown-menu {
+.dropdown:hover > .dropdown-menu {
     display: block;
 }
 
@@ -22,10 +22,11 @@
 .navbar {
     font-size: 12pt;
     direction: rtl;
+    text-align: center !important;
 }
 
-@media (max-width: 575px) {
-     #navigationBar {
+@media (max-width: 705px) {
+    #navigationBar {
         display: none;
     }
 }
