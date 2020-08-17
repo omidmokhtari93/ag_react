@@ -6,8 +6,8 @@ import './Logo.module.css';
 const Logo = props => {
     return (
         <Wrapper>
-            <a className="logo" href="#">
-                <img src={logo} className="logo-img" />
+            <a className="logo" href="/">
+                <img src={logo} alt="logo" className="logo-img" />
             </a>
         </Wrapper>
     )

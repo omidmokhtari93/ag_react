@@ -21,19 +21,11 @@
 
 .navbar {
     font-size: 12pt;
+    direction: rtl;
 }
 
 @media (max-width: 575px) {
-    .navbar{
-        direction: ltr !important;
-    }
-    #navigationBar {
+     #navigationBar {
         display: none;
-    }
-}
-
-@media (min-width: 576px) {
-    .navbar{
-        direction: rtl !important;
     }
 }
