@@ -26,7 +26,7 @@ class SearchBox extends Component {
         this.props.showLoading()
         this.state.timeOut = setTimeout(() => {
             if (value.trim()) {
-                this.props.search(value)
+                this.props.search(value, this.props.url)
             } else {
                 this.props.clear();
                 this.props.hideLoading();
@@ -42,7 +42,7 @@ class SearchBox extends Component {
         return (
             <div className="search-box light-sans" ref={this.searchBoxRef}
                 style={this.props.width
-                    ? { width: this.props.width }
+                    ? { width: this.props.width + "rem" }
                     : { width: '100%' }}>
                 <img src={searcIcon} className="search-icon" />
                 <Loading show={this.props.loading} />
@@ -67,7 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        search: (keyword) => dispatch(actions.apiSearchGol(keyword)),
+        search: (keyword, url) => dispatch(actions.apiSearchGol(keyword, url)),
         clear: () => dispatch(actions.clearResult()),
         showLoading: () => dispatch(actions.showLoading()),
         hideLoading: () => dispatch(actions.hideLoading())

@@ -22,14 +22,17 @@ class Navbar extends Component {
         return (
             <Wrapper>
                 <SideNavar close={this.handleShowSideBar} show={this.state.showSideBar} />
-                <nav className="sans navbar navbar-expand-sm navbar-light bg-light p-0">
-                    <a className="navbar-brand" href="#">
-                        <Logo />
-                    </a>
-                    <ul className="navbar-nav" id="navigationBar">
+                <nav className="sans navbar navbar-expand-sm navbar-light bg-light p-0 pl-3 pr-3">
+                    <Logo />
+                    <ul className="navbar-nav pr-4" id="navigationBar">
                         <NavBarItems />
                     </ul>
-                    <SearchBox width="50%" placeholder="جستجوی گل" />
+                    <SearchBox
+                        width="17"
+                        placeholder="جستجوی سریع گل"
+                        url="http://2.180.37.75/anbargol/api/search"
+                    />
+
                     <ShowButton show={this.handleShowSideBar} />
                 </nav>
             </Wrapper>

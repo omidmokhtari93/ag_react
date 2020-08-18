@@ -1,5 +1,7 @@
 .logo{
-    margin-left: 15px;
+    position: absolute;
+    right: 15px;
+
 }
 
 .logo .logo-img{

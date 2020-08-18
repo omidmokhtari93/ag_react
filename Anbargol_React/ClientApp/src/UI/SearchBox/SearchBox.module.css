@@ -3,6 +3,7 @@
     position: relative;
     font-weight: 900;
     padding: 0;
+    margin: 0px;
 }
 
 .search-box input {
@@ -13,6 +14,8 @@
     margin: 0px;
     padding: 3px 25px;
     border: 1px solid #ced4da;
+    text-align: right;
+    direction: rtl;
 }
 
 .search-box .search-icon {
@@ -33,6 +36,7 @@
     max-height: 200px;
     overflow: auto;
 }
+
 .search-box ul li {
     direction: rtl;
     text-align: right;
@@ -49,8 +53,10 @@
     cursor: pointer;
 }
 
-@media(min-width:705px){
+@media(max-width:705px){
     .search-box{
-        margin: 5px 15px;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }

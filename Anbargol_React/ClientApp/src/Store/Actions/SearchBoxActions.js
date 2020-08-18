@@ -9,9 +9,9 @@ export const searchGolResult = (res) => {
         result: res
     }
 }
-export const apiSearchGol = key => {
+export const apiSearchGol = (key, url) => {
     return dispatch => {
-        fetch('http://2.180.37.75/anbargol/api/search?name=' + key + '&code= ' + key)
+        fetch(url + '?name=' + key + '&code= ' + key)
             .then(response => response.json())
             .then(json => dispatch(searchGolResult(json)))
     }
