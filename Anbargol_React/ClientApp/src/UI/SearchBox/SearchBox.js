@@ -3,32 +3,56 @@ import { connect } from 'react-redux';
 import './SearchBox.module.css';
 import searcIcon from '../../Assets/images/search.png'
 import Loading from '../Loading/Loading';
+import * as actions from '../../Store/Actions/SearchBoxActions';
 
 class SearchBox extends Component {
+    state = {
+        timeOut: null,
+    }
+    searchBoxRef = React.createRef();
+
+    componentDidMount() {
+        document.addEventListener('click', (e) => {
+            !this.searchBoxRef.current.contains(e.target) && this.props.clear()
+        })
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click');
+    }
+
+    handleSearch = value => {
+        clearTimeout(this.state.timeOut)
+        this.props.showLoading()
+        this.state.timeOut = setTimeout(() => {
+            if (value.trim()) {
+                this.props.search(value)
+            } else {
+                this.props.clear();
+                this.props.hideLoading();
+            }
+        }, 1000);
+    }
+
+    showReport = id => {
+        // console.log(id)
+    }
 
     render() {
         return (
-            <div className="search-box light-sans"
+            <div className="search-box light-sans" ref={this.searchBoxRef}
                 style={this.props.width
                     ? { width: this.props.width }
                     : { width: '100%' }}>
                 <img src={searcIcon} className="search-icon" />
-                <Loading show={true} />
-                <input placeholder={this.props.placeholder} />
-                <ul>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                    <li>گل شماره 1</li>
-                </ul>
+                <Loading show={this.props.loading} />
+                <input placeholder={this.props.placeholder} autoComplete="off"
+                    onChange={(e) => this.handleSearch(e.target.value)} />
+                {this.props.resultItems.length > 0 && <ul>
+                    {this.props.resultItems.map((x, index) => <li onClick={() => this.showReport(x.Id)} key={index}>
+                        {x.GolName + ' / ' + x.Format + ' / ' + x.Color + ' / ' + x.ColorType + ' / ' + x.Code}
+                    </li>)}
+                </ul>}
             </div>
         )
     }
@@ -36,13 +60,17 @@ class SearchBox extends Component {
 
 const mapStateToProps = state => {
     return {
-        keyword: state.keyword
+        resultItems: state.result,
+        loading: state.loading
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        search: () => dispatch({ type: '', value: '' })
+        search: (keyword) => dispatch(actions.apiSearchGol(keyword)),
+        clear: () => dispatch(actions.clearResult()),
+        showLoading: () => dispatch(actions.showLoading()),
+        hideLoading: () => dispatch(actions.hideLoading())
     }
 }
 

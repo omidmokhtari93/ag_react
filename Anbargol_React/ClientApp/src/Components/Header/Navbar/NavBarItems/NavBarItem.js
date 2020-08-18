@@ -1,5 +1,6 @@
 import React from 'react';
 import Wrapper from '../../../../Shared/Wrapper/Wrapper';
+import './NavBarItems.module.css';
 
 const NavBarItems = props => {
     return (
