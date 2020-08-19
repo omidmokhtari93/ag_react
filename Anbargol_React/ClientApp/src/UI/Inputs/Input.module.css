@@ -1,0 +1,16 @@
+.react-input {
+    width: 100%;
+    direction: rtl;
+}
+
+.react-input input {
+    width: 100%;
+}
+
+.react-input .label {
+    float: right;
+}
+
+.react-input .message { 
+    float: left;
+}

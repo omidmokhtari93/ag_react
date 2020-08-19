@@ -28,7 +28,7 @@ const NavBarItems = props => {
             <li className="nav-item">
                 <a className="nav-link" href="#">پشتیبان گیری</a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item pl-4">
                 <a className="nav-link" href="#">خروج</a>
             </li>
         </Wrapper>

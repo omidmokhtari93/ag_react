@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <Wrapper>
         <Navbar />
-        <div className="container sans">
+        <div className="container sans p-4 border">
           <AddNewFlower />
         </div>
       </Wrapper>

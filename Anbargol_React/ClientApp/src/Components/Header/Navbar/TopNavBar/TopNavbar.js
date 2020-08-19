@@ -26,19 +26,19 @@ class Navbar extends Component {
         return (
             <Wrapper>
                 <SideNavar close={this.handleShowSideBar} show={this.state.showSideBar} />
-                <nav className="sans navbar navbar-expand-sm navbar-light bg-light p-0 pl-3 pr-3">
+                <nav className="sans navbar navbar-expand-sm navbar-light bg-light p-2 border-bottom">
                     <Logo />
                     <ul className="navbar-nav pr-4" id="navigationBar">
                         <NavBarItems />
                     </ul>
                     <SearchBoxNoRedux
                         url="http://2.180.37.75/anbargol/api/search"
-                        reqParam={['name', 'code']} //request parameters
-                        resParam={['GolName', 'Format', 'Color', 'ColorType', 'Code']} //response parameters
-                        id="Id" //this is identity that choose in dropdown
+                        reqParam={['name', 'code']}                                     //request parameters
+                        resParam={['GolName', 'Format', 'Color', 'ColorType', 'Code']}  //response parameters
+                        id="Id"                                                         //this is identity that choose in dropdown
                         width="17"
                         placeholder="جستجوی سریع گل"
-                        handleResponse={this.handleSearch} // return an object contain Flower Name and Flower Id
+                        handleResponse={this.handleSearch}                              // return an object contain Flower Name and Flower Id
                     />
                     <ShowButton show={this.handleShowSideBar} />
                 </nav>
