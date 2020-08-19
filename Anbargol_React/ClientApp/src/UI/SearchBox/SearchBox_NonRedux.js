@@ -24,14 +24,12 @@ class SearchBoxNoRedux extends Component {
 
     handleSearch = value => {
         clearTimeout(this.state.timeOut)
-        this.setState({ loading: true })
+        this.setState({ result: [], loading: true })
         this.state.timeOut = setTimeout(() => {
             if (value.trim()) {
                 this.handleApiReq(value).then(x => {
                     this.setState({ result: this.state.result.concat(x.data), loading: false })
                 })
-            } else {
-                this.setState({ result: [], loading: false })
             }
         }, 1000);
     }

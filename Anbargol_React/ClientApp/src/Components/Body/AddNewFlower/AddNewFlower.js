@@ -41,10 +41,5 @@ const mapStateToProps = state => {
         omid: state.result
     }
 }
-const mapDispatchToProps = dispatch => {
-    return {
-        omidi: () => dispatch({ type: 'F' })
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNewFlower);
+export default connect(mapStateToProps)(AddNewFlower);
