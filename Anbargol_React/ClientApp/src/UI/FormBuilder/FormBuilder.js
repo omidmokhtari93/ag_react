@@ -7,7 +7,10 @@ const FormBuilder = props => {
     let create = e => {
         const elementsLength = Object.keys(props.inputs).length;
         const elements = Object.keys(props.inputs).map((key, idx) => {
-            return <Input {...props.inputs[key]} name={key} key={idx} handleChange={props.handleChange} />
+            return <Input {...props.inputs[key]}
+                name={key}
+                key={idx}
+                handleChange={props.handleChange} />
         })
         const rows = Math.ceil(elementsLength / 3);
         const form = [];

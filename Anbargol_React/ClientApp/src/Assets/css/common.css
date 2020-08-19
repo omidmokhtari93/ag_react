@@ -17,7 +17,15 @@
     font-family: "bold_sans";
     src: url("../fonts/IRANSansWeb_Bold.woff2");
 }
-
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.container {
+    min-height: 92vh;
+}
 .medium-sans {
     font-family: medium_sans !important;
     font-size: 12px;
