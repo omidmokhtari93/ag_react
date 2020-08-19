@@ -25,6 +25,7 @@
     top: 7px;
 }
 .search-box ul {
+    z-index: 999;
     position: absolute;
     width: 100%;
     list-style-type: none;

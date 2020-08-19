@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import SearchBoxNoRedux from '../../../UI/SearchBox/SearchBox_NonRedux';
 
 class AddNewFlower extends Component {
     render() {
-        console.log(this.props)
         return (
-            123
+            <SearchBoxNoRedux />
         )
     }
 }
 const mapStateToProps = state => {
-    console.log(state);
     return {
         omid: state.result
     }
 }
 const mapDispatchToProps = dispatch => {
-    console.log(dispatch)
     return {
         omidi: () => dispatch({ type: 'F' })
     }

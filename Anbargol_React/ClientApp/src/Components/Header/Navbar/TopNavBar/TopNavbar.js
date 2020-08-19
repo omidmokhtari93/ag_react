@@ -5,7 +5,7 @@ import Wrapper from '../../../../Shared/Wrapper/Wrapper'
 import ShowButton from '../ShowButton/ShowButton';
 import NavBarItems from '../NavBarItems/NavBarItem';
 import Logo from '../../../../UI/Logo/Logo';
-import SearchBox from '../../../../UI/SearchBox/SearchBox';
+import SearchBoxNoRedux from '../../../../UI/SearchBox/SearchBox_NonRedux';
 
 class Navbar extends Component {
     state = {
@@ -18,6 +18,10 @@ class Navbar extends Component {
             : this.setState({ showSideBar: false })
     }
 
+    handleSearch = res => {
+        console.log(res)
+    }
+
     render() {
         return (
             <Wrapper>
@@ -27,12 +31,15 @@ class Navbar extends Component {
                     <ul className="navbar-nav pr-4" id="navigationBar">
                         <NavBarItems />
                     </ul>
-                    <SearchBox
+                    <SearchBoxNoRedux
+                        url="http://2.180.37.75/anbargol/api/search"
+                        reqParam={['name', 'code']} //request parameters
+                        resParam={['GolName', 'Format', 'Color', 'ColorType', 'Code']} //response parameters
+                        id="Id" //this is identity that choose in dropdown
                         width="17"
                         placeholder="جستجوی سریع گل"
-                        url="http://2.180.37.75/anbargol/api/search"
+                        handleResponse={this.handleSearch} // return an object contain Flower Name and Flower Id
                     />
-
                     <ShowButton show={this.handleShowSideBar} />
                 </nav>
             </Wrapper>
