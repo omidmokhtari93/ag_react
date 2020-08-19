@@ -20,7 +20,7 @@ class AddNewFlower extends Component {
         }
     }
     handleChange = element => {
-        console.log(element.target.value)
+        //console.log(element.target.value)
         let updatedValue = { ...this.state }
         updatedValue.inputs[element.target.name].value = element.target.value;
         this.setState({ ...updatedValue })

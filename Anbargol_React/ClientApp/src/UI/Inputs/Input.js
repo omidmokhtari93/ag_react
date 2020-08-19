@@ -31,9 +31,8 @@ const Input = props => {
             case type.textarea:
                 return <textarea rows={props.rows ? props.rows : 1} {...attr} onChange={(e) => handleChange(e)}></textarea>
             case type.file:
-                return (<div className="form-control form-control-md">
-                    <input type="file" defaultValue={attr.value} type={attr.type} onChange={(e) => handleChange(e)} />
-                </div>)
+                return (<input style={{ padding: '3px' }} className="form-control form-control-md" type="file" defaultValue={attr.value} type={attr.type}
+                    onChange={(e) => handleChange(e)} />)
             default:
                 return <input {...attr} onChange={(e) => handleChange(e)} />
         }
