@@ -1,7 +1,7 @@
 import React from 'react';
 import './Input.module.css';
 import * as inputTypes from './inputTypes';
-import DatePicker from 'react-datepicker2';
+import DatePickerWrapper from '../DatePicker/DatePickerWrapper';
 
 const Input = props => {
     const attr = {
@@ -15,9 +15,9 @@ const Input = props => {
     let createInput = e => {
         switch (props.type) {
             case inputTypes.text:
-                return <input {...attr} onChange={(e) => props.handleChange(e)} />
+                return <input {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
             case inputTypes.select:
-                return <select {...attr} onChange={(e) => props.handleChange(e)}>
+                return <select {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)}>
                     <option value="">انتخاب کنید</option>
                     {props.options &&
                         props.options.map((op, idx) =>
@@ -26,20 +26,16 @@ const Input = props => {
                             </option>)}
                 </select>
             case inputTypes.textarea:
-                return <textarea rows={props.rows ? props.rows : 1} {...attr} onChange={(e) => props.handleChange(e)}></textarea>
+                return <textarea rows={props.rows ? props.rows : 1} {...attr}
+                    onChange={(e) => props.handleChange(e.target.name, e.target.value)}></textarea>
             case inputTypes.file:
-                return (<input style={{ padding: '3px' }} className="form-control form-control-md" type="file" defaultValue={attr.value} type={attr.type}
-                    onChange={(e) => props.handleChange(e)} />)
+                return (<input style={{ padding: '3px' }} className="form-control form-control-md"
+                    type="file" defaultValue={attr.value} type={attr.type}
+                    onChange={(e) => props.handleChange(e.target.name, e.target.value)} />)
             case inputTypes.date:
-                return <DatePicker
-                    // onChange={value => this.setState({ value })}
-                    isGregorian={false}
-                    timePicker={false}
-                    inputJalaaliFormat="jYYYY/jMM/jDD"
-                    value={props.value}
-                />
+                return <DatePickerWrapper name={props.name} handleChange={props.handleChange} />
             default:
-                return <input {...attr} onChange={(e) => props.handleChange(e)} />
+                return <input {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
         }
     }
 

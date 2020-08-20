@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Wrapper from '../../../Shared/Wrapper/Wrapper';
 import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import FormBuilder from '../../../UI/FormBuilder/FormBuilder';
+import DatePickerWrapper from '../../../UI/DatePicker/DatePickerWrapper';
 
 
 class AddNewFlower extends Component {
@@ -20,11 +21,10 @@ class AddNewFlower extends Component {
             imageFile: { value: '', required: true, touched: false, type: "file", label: "تصویر گل" }
         }
     }
-    handleChange = element => {
-        //console.log(element.target.value)
+    handleChange = (name, value) => {
         let updatedState = { ...this.state }
-        updatedState.inputs[element.target.name].value = element.target.value;
-        updatedState.inputs[element.target.name].touched = true;
+        updatedState.inputs[name].value = value;
+        updatedState.inputs[name].touched = true;
         this.setState({ ...updatedState })
     }
 
@@ -33,8 +33,7 @@ class AddNewFlower extends Component {
             <Wrapper>
                 <ComponentsHeader>ثبت گل جدید</ComponentsHeader>
                 <FormBuilder inputs={this.state.inputs} handleChange={this.handleChange} />
-                <hr />
-                
+                <hr className="mt-0" />
             </Wrapper>
         )
     }
