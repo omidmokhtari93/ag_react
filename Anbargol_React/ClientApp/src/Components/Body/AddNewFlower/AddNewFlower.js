@@ -17,8 +17,8 @@ class AddNewFlower extends Component {
             customer: { value: '', required: true, touched: false, type: "select", label: "مشتری" },
             company: { value: '', required: true, touched: false, type: "select", label: "شرکت" },
             enterDate: { value: '', required: true, touched: false, type: "date", label: "تاریخ ورود" },
-            comment: { value: '', required: true, touched: false, type: "textarea", label: "توضیحات" },
-            imageFile: { value: '', required: true, touched: false, type: "file", label: "تصویر گل" }
+            comment: { value: '', required: false, touched: false, type: "textarea", label: "توضیحات" },
+            imageFile: { value: '', required: false, touched: false, type: "file", label: "تصویر گل" }
         },
         table: {
             header: [...table.TableGolHeaders],
