@@ -16,7 +16,7 @@ class AddNewFlower extends Component {
             colorType: { value: '', required: true, touched: false, type: "select", label: "نوع رنگ" },
             customer: { value: '', required: true, touched: false, type: "select", label: "مشتری" },
             company: { value: '', required: true, touched: false, type: "select", label: "شرکت" },
-            enterDate: { value: '', required: true, touched: false, type: "date", label: "تاریخ ورود" },
+            enterDate: { value: '', required: true, touched: true, type: "date", label: "تاریخ ورود" },
             comment: { value: '', required: false, touched: false, type: "textarea", label: "توضیحات" },
             imageFile: { value: '', required: false, touched: false, type: "file", label: "تصویر گل" }
         },
@@ -26,6 +26,7 @@ class AddNewFlower extends Component {
         }
     }
     handleChange = (name, value) => {
+        console.log(value)
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;

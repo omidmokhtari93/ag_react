@@ -4,7 +4,6 @@ import './Loading.module.css';
 import Wrapper from '../../Shared/Wrapper/Wrapper';
 
 const Loading = props => {
-    console.log(props.style)
     return (
         <Wrapper>
             {props.show && <img src={src}
