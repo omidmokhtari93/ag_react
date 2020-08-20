@@ -1,0 +1,54 @@
+.react-table th {
+    text-align: center !important;
+    background-color: #0c0183;
+    color: #fefefe;
+    border: none !important;
+    padding: 2px 5px !important;
+}
+
+.react-table {
+    font-family: sans;
+    text-align: center;
+    border: 1px solid black;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0 !important;
+    direction: rtl;
+    width: 100%;
+}
+
+.react-table tr th {
+    padding: 2px 5px !important;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.react-table td {
+    padding: 2px 5px !important;
+    vertical-align: middle !important;
+    border: none !important;
+    border-bottom: #c7ced6 1px solid !important;
+    border-top: #c7ced6 1px solid !important;
+    text-shadow: -1px 0px 1px rgba(149, 150, 150, 1);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.react-table td a {
+    margin-top: 5px;
+    color: blue !important;
+}
+
+.react-table td span {
+    margin-top: 5px;
+}
+
+.react-table tr:nth-child(even) {
+    background-color: #fefefe;
+}
+
+.react-table tr:nth-child(odd) {
+    background-color: #f7f6fe;
+}

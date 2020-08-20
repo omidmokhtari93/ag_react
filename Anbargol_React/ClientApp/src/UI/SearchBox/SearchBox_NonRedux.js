@@ -8,7 +8,13 @@ class SearchBoxNoRedux extends Component {
     state = {
         timeOut: null,
         loading: false,
-        result: []
+        result: [],
+        loadingStyle: {
+            width: "20px",
+            position: "absolute",
+            left: "4px",
+            top: "9px",
+        }
     }
     searchBoxRef = React.createRef();
 
@@ -62,7 +68,7 @@ class SearchBoxNoRedux extends Component {
                     ? { width: this.props.width + "rem" }
                     : { width: '100%' }}>
                 <img src={searcIcon} className="search-icon" />
-                <Loading show={this.state.loading} />
+                <Loading show={this.state.loading} style={this.state.loadingStyle} />
                 <input placeholder={this.props.placeholder} autoComplete="off"
                     onChange={(e) => this.handleSearch(e.target.value)} />
                 {this.state.result.length > 0 && <ul>

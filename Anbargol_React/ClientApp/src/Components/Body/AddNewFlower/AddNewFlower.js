@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Wrapper from '../../../Shared/Wrapper/Wrapper';
 import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import FormBuilder from '../../../UI/FormBuilder/FormBuilder';
-import DatePickerWrapper from '../../../UI/DatePicker/DatePickerWrapper';
-
+import Table from '../../../UI/Table/Table';
+import * as table from '../../../UI/Table/TableUtility';
 
 class AddNewFlower extends Component {
     state = {
@@ -19,6 +19,10 @@ class AddNewFlower extends Component {
             enterDate: { value: '', required: true, touched: false, type: "date", label: "تاریخ ورود" },
             comment: { value: '', required: true, touched: false, type: "textarea", label: "توضیحات" },
             imageFile: { value: '', required: true, touched: false, type: "file", label: "تصویر گل" }
+        },
+        table: {
+            header: [...table.TableGolHeaders],
+            body: [...table.TableGolBodies]
         }
     }
     handleChange = (name, value) => {
@@ -34,6 +38,9 @@ class AddNewFlower extends Component {
                 <ComponentsHeader>ثبت گل جدید</ComponentsHeader>
                 <FormBuilder inputs={this.state.inputs} handleChange={this.handleChange} />
                 <hr className="mt-0" />
+                Buttons Area
+                <hr className="mt-0" />
+                <Table dataSource={this.state.table} />
             </Wrapper>
         )
     }
