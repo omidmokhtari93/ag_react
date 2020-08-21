@@ -3,9 +3,11 @@ import './SearchBox.module.css';
 import searcIcon from '../../Assets/images/search.png'
 import Loading from '../Loading/Loading';
 import http from 'axios';
+import propTypes from 'prop-types';
 
 class SearchBoxNoRedux extends Component {
     state = {
+        value: '',
         timeOut: null,
         loading: false,
         result: [],
@@ -20,7 +22,9 @@ class SearchBoxNoRedux extends Component {
 
     componentDidMount() {
         document.addEventListener('click', (e) => {
-            !this.searchBoxRef.current.contains(e.target) && this.setState({ result: [], loading: false })
+            (!this.searchBoxRef.current.contains(e.target)) &&
+                this.setState({ result: [], loading: false, value: '' })
+
         })
     }
 
@@ -30,12 +34,14 @@ class SearchBoxNoRedux extends Component {
 
     handleSearch = value => {
         clearTimeout(this.state.timeOut)
-        this.setState({ result: [], loading: true })
+        this.setState({ result: [], loading: true, value: value })
         this.state.timeOut = setTimeout(() => {
             if (value.trim()) {
                 this.handleApiReq(value).then(x => {
                     this.setState({ result: this.state.result.concat(x.data), loading: false })
                 })
+            } else {
+                this.setState({ loading: false })
             }
         }, 1000);
     }
@@ -70,6 +76,7 @@ class SearchBoxNoRedux extends Component {
                 <img src={searcIcon} className="search-icon" />
                 <Loading show={this.state.loading} style={this.state.loadingStyle} />
                 <input placeholder={this.props.placeholder} autoComplete="off"
+                    value={this.state.value}
                     onChange={(e) => this.handleSearch(e.target.value)} />
                 {this.state.result.length > 0 && <ul>
                     {this.createDropdown()}
@@ -78,5 +85,12 @@ class SearchBoxNoRedux extends Component {
         )
     }
 }
-
+SearchBoxNoRedux.propTypes = {
+    reqParam: propTypes.array,
+    url: propTypes.string,
+    resParam: propTypes.array,
+    placeholder: propTypes.string,
+    width: propTypes.string,
+    handleResponse: propTypes.func
+}
 export default SearchBoxNoRedux;
