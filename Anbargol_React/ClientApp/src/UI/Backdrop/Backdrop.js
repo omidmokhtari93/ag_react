@@ -1,5 +1,6 @@
 import React from 'react';
 import './Backdrop.module.css';
+import propTypes from 'prop-types';
 
 const Backdrop = props => {
     return (
@@ -11,4 +12,10 @@ const Backdrop = props => {
         ></div>
     )
 }
+
+Backdrop.propTypes = {
+    show: propTypes.bool,
+    dismiss: propTypes.func
+}
+
 export default Backdrop;

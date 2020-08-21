@@ -37,7 +37,11 @@ class AddNewFlower extends Component {
         return (
             <Wrapper>
                 <ComponentsHeader>ثبت گل جدید</ComponentsHeader>
-                <FormBuilder inputs={this.state.inputs} handleChange={this.handleChange} />
+                <FormBuilder
+                    inputs={this.state.inputs}
+                    handleChange={this.handleChange}
+                    column="4"
+                />
                 <hr className="mt-0" />
                 Buttons Area
                 <hr className="mt-0" />
