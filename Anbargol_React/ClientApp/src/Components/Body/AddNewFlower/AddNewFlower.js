@@ -43,7 +43,9 @@ class AddNewFlower extends Component {
     }
 
     removeSearch = name => {
-        console.log(name)
+        let updatedState = { ...this.state };
+        updatedState.inputs[name].value = ''
+        this.setState({ updatedState })
     }
 
     handleChange = (name, value) => {
@@ -61,7 +63,7 @@ class AddNewFlower extends Component {
                 <FormBuilder
                     inputs={this.state.inputs}
                     handleChange={this.handleChange}
-                    column="4"
+                    column="3"
                 />
                 <hr className="mt-0" />
                 Buttons Area

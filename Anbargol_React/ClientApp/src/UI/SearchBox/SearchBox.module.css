@@ -60,8 +60,6 @@
 @media (max-width: 705px) {
     .search-box {
         margin: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
     }
 }
 .searchbox-selected {

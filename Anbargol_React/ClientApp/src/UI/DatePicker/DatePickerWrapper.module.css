@@ -27,7 +27,8 @@
 }
 
 .rn-datepicker {
-    top: 55px !important;
+    top: 40px !important;
+    padding: 19px !important;
 }
 
 .rn-date-wrapper.datepicker {
