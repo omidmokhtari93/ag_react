@@ -18,7 +18,10 @@ const FormBuilder = props => {
         let counter = 0;
         for (let i = 0; i < rows; i++) {
             const input = [...Array(parseInt(props.column))].map(x => {
-                let item = <div key={counter} className={ColumnCreator(props.column)}>{elements[counter]}</div>
+                let item = <div key={counter}
+                    className={ColumnCreator(props.column)}>
+                    {elements[counter]}
+                </div>
                 counter++;
                 return item
             })

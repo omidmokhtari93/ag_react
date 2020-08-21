@@ -48,6 +48,11 @@ class SearchBoxNoRedux extends Component {
         }, this.props.timeout);
     }
 
+    removeSelected = () => {
+        this.setState({ showSelected: false });
+        this.props.removeSelected(this.props.name)
+    }
+
     handleApiReq = value => {
         const obj = {};
         this.props.reqParam.map(x => obj[x] = value)
@@ -74,13 +79,13 @@ class SearchBoxNoRedux extends Component {
 
     render() {
         return (
-            <div className="search-box light-sans" ref={this.searchBoxRef}
+            <div className="search-box light-sans" ref={this.searchBoxRef} name={this.props.name}
                 style={this.props.width
                     ? { width: this.props.width + "rem" }
                     : { width: '100%' }}>
                 {this.state.showSelected && <div className="searchbox-selected">
                     <span>{this.state.selectedText}</span>
-                    <span onClick={() => this.setState({ showSelected: false })}>✖</span>
+                    <span onClick={this.removeSelected}>✖</span>
                 </div>}
                 <img src={searcIcon} className="search-icon" />
                 <Loading show={this.state.loading} style={this.state.loadingStyle} />
@@ -102,6 +107,8 @@ SearchBoxNoRedux.propTypes = {
     width: propTypes.string,
     handleResponse: propTypes.func,
     removeOnChoose: propTypes.bool,
-    timeout: propTypes.string
+    timeout: propTypes.string,
+    name: propTypes.string,
+    id: propTypes.string
 }
 export default SearchBoxNoRedux;

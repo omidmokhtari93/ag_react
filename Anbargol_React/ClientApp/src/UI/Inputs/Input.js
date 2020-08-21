@@ -1,7 +1,8 @@
 import React from 'react';
 import './Input.module.css';
-import * as inputTypes from './inputTypes';
+import * as inputTypes from '../../Shared/inputTypes';
 import DatePickerWrapper from '../DatePicker/DatePickerWrapper';
+import SearchBoxNoRedux from '../SearchBox/SearchBox_NonRedux';
 
 const Input = props => {
     const attr = {
@@ -9,9 +10,7 @@ const Input = props => {
         type: props.type,
         className: "form-control form-control-md",
         name: props.name,
-        required: props.required
     }
-
     let createInput = e => {
         switch (props.type) {
             case inputTypes.text:
@@ -33,7 +32,12 @@ const Input = props => {
                     type="file" defaultValue={attr.value} type={attr.type}
                     onChange={(e) => props.handleChange(e.target.name, e.target.value)} />)
             case inputTypes.date:
-                return <DatePickerWrapper name={props.name} handleChange={props.handleChange} />
+                return <DatePickerWrapper name={props.name} handleChange={(name, value) => props.handleChange(name, value)} />
+            case inputTypes.search:
+                return <SearchBoxNoRedux
+                    {...props}
+                    handleResponse={(e) => props.handleChange(props.name, e.id)}
+                />
             default:
                 return <input {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
         }

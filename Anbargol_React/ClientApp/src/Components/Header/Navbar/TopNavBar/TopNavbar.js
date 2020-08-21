@@ -40,8 +40,9 @@ class Navbar extends Component {
                         width="25"
                         placeholder="جستجوی سریع گل"
                         handleResponse={this.handleSearch} // return an object contain Flower Name and Flower Id
-                        removeOnChoose={true}
+                        removeOnChoose={false}
                         timeout="200"
+                        name="searchbox"
                         value={this.state.searchBoxValue}
                     />
                     <ShowButton show={this.handleShowSideBar} />

@@ -5,28 +5,49 @@ import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import FormBuilder from '../../../UI/FormBuilder/FormBuilder';
 import Table from '../../../UI/Table/Table';
 import * as table from '../../../UI/Table/TableUtility';
+import * as inputType from '../../../Shared/inputTypes';
 
 class AddNewFlower extends Component {
     state = {
         inputs: {
-            name: { value: '', required: true, touched: false, type: "text", label: "نام گل" },
-            code: { value: '', required: true, touched: false, type: "text", label: "کد گل" },
-            format: { value: '', required: true, touched: false, type: "select", label: "قالب", options: [{ name: 'louse', id: 555 }, { name: 'name2', id: 52 }] },
-            color: { value: '', required: true, touched: false, type: "select", label: "رنگ" },
-            colorType: { value: '', required: true, touched: false, type: "select", label: "نوع رنگ" },
-            customer: { value: '', required: true, touched: false, type: "select", label: "مشتری" },
-            company: { value: '', required: true, touched: false, type: "select", label: "شرکت" },
-            enterDate: { value: '', required: true, touched: true, type: "date", label: "تاریخ ورود" },
-            comment: { value: '', required: false, touched: false, type: "textarea", label: "توضیحات" },
-            imageFile: { value: '', required: false, touched: false, type: "file", label: "تصویر گل" }
+            name: { value: '', required: true, touched: false, type: inputType.text, label: "نام گل" },
+            code: { value: '', required: true, touched: false, type: inputType.text, label: "کد گل" },
+            format: { value: '', required: true, touched: false, type: inputType.select, label: "قالب", options: [{ name: 'louse', id: 555 }, { name: 'name2', id: 52 }] },
+            color: { value: '', required: true, touched: false, type: inputType.select, label: "رنگ" },
+            colorType: { value: '', required: true, touched: false, type: inputType.select, label: "نوع رنگ" },
+            customer: { value: '', required: true, touched: false, type: inputType.select, label: "مشتری" },
+            company: { value: '', required: true, touched: false, type: inputType.select, label: "شرکت" },
+            enterDate: { value: '', required: true, touched: true, type: inputType.date, label: "تاریخ ورود" },
+            comment: { value: '', required: false, touched: false, type: inputType.textarea, label: "توضیحات" },
+            imageFile: { value: '', required: false, touched: false, type: inputType.file, label: "تصویر گل" },
+            searchBox: {
+                url: 'http://2.180.37.75/anbargol/api/search',
+                reqParam: ['name', 'code'],
+                resParam: ['GolName', 'Format', 'Color', 'ColorType', 'Code'],
+                id: 'Id',
+                placeholder: 'جستجو',
+                removeOnChoose: true,
+                timeout: '200',
+                value: '',
+                type: inputType.search,
+                label: 'جستجو',
+                required: true,
+                touched: false,
+                removeSelected: (name) => this.removeSearch(name)
+            }
         },
         table: {
             header: [...table.TableGolHeaders],
             body: [...table.TableGolBodies]
         }
     }
+
+    removeSearch = name => {
+        console.log(name)
+    }
+
     handleChange = (name, value) => {
-        console.log(value)
+        console.log(name, value)
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
