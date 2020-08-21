@@ -16,7 +16,9 @@ class SearchBoxNoRedux extends Component {
             position: "absolute",
             left: "4px",
             top: "9px",
-        }
+        },
+        showSelected: false,
+        selectedText: ''
     }
     searchBoxRef = React.createRef();
 
@@ -43,7 +45,7 @@ class SearchBoxNoRedux extends Component {
             } else {
                 this.setState({ loading: false })
             }
-        }, 1000);
+        }, this.props.timeout);
     }
 
     handleApiReq = value => {
@@ -55,7 +57,10 @@ class SearchBoxNoRedux extends Component {
     }
 
     showReport = (name, id) => {
+        this.props.removeOnChoose
+            && this.setState({ showSelected: true, selectedText: name, result: [] })
         this.props.handleResponse({ name: name, id: id })
+        this.setState({ result: [] })
     }
 
     createDropdown = obj => {
@@ -73,6 +78,10 @@ class SearchBoxNoRedux extends Component {
                 style={this.props.width
                     ? { width: this.props.width + "rem" }
                     : { width: '100%' }}>
+                {this.state.showSelected && <div className="searchbox-selected">
+                    <span>{this.state.selectedText}</span>
+                    <span onClick={() => this.setState({ showSelected: false })}>✖</span>
+                </div>}
                 <img src={searcIcon} className="search-icon" />
                 <Loading show={this.state.loading} style={this.state.loadingStyle} />
                 <input placeholder={this.props.placeholder} autoComplete="off"
@@ -91,6 +100,8 @@ SearchBoxNoRedux.propTypes = {
     resParam: propTypes.array,
     placeholder: propTypes.string,
     width: propTypes.string,
-    handleResponse: propTypes.func
+    handleResponse: propTypes.func,
+    removeOnChoose: propTypes.bool,
+    timeout: propTypes.string
 }
 export default SearchBoxNoRedux;

@@ -29,4 +29,8 @@
     #navigationBar {
         display: none;
     }
+    #top-navbar {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
 }
