@@ -9,7 +9,7 @@ class Table extends Component {
     state = {
         body: [],
         loading: false,
-        colSpan: this.props.dataSource.header.length,
+        colSpan: this.props.creationData.header.length,
         loadingStyle: {
             width: "30px",
             height: 'auto'
@@ -36,7 +36,7 @@ class Table extends Component {
 
     createBody = e => {
         const serverDataLength = this.state.body.length;
-        const body = this.props.dataSource.body;
+        const body = this.props.creationData.body;
         const tableBody = []
         for (let i = 0; i < serverDataLength; i++) {
             const td = body.map((x, idx) => <td key={idx}>{this.state.body[i][x]}</td>);
@@ -61,7 +61,7 @@ class Table extends Component {
                 <table className="react-table">
                     <thead>
                         <tr>
-                            {this.props.dataSource.header.map((x, idx) => {
+                            {this.props.creationData.header.map((x, idx) => {
                                 return <th key={idx}>{x}</th>
                             })}
                         </tr>
