@@ -52,3 +52,24 @@
 .react-table tr:nth-child(odd) {
     background-color: #f7f6fe;
 }
+
+.table-search {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    position: relative;
+    text-align: right;
+    direction: rtl;
+    padding: 2px 50px 2px 2px;
+    background-color: rgb(231, 231, 231);
+}
+
+.table-search input {
+    border: none;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    border-radius: 8px;
+    padding: 5px;
+}
+.table-search input:focus{
+    outline: none;
+}

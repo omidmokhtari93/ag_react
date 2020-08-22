@@ -20,9 +20,9 @@ class Table extends Component {
     }
 
     fetchData = () => {
-        this.setState({ loading: true })
-        http.get('http://2.180.37.75/anbargol/api/getall?id=1485')
-            .then(x => this.setState({ body: x.data }))
+        // this.setState({ loading: true })
+        // http.get('http://2.180.37.75/anbargol/api/getall?id=1485')
+        //     .then(x => this.setState({ body: x.data }))
     }
 
     createBody = e => {
@@ -39,29 +39,35 @@ class Table extends Component {
     render() {
 
         return (
-            <table className="react-table">
-                <thead>
-                    <tr>
-                        {this.props.dataSource.header.map((x, idx) => {
-                            return <th key={idx}>{x}</th>
-                        })}
-                    </tr>
-                </thead>
-                {!this.state.body.length
-                    ? <tbody>
+            <Wrapper>
+                <div className="table-search">
+                    <as
+                    <input type="text" />
+                </div>
+                <table className="react-table">
+                    <thead>
                         <tr>
-                            <td colSpan={this.state.colSpan}>
-                                <Loading show={true}
-                                    style={this.state.loadingStyle} />
-                            </td>
+                            {this.props.dataSource.header.map((x, idx) => {
+                                return <th key={idx}>{x}</th>
+                            })}
                         </tr>
-                    </tbody>
-                    : (<Wrapper>
-                        <tbody>
-                            {this.createBody()}
+                    </thead>
+                    {!this.state.body.length
+                        ? <tbody>
+                            <tr>
+                                <td colSpan={this.state.colSpan}>
+                                    <Loading show={true}
+                                        style={this.state.loadingStyle} />
+                                </td>
+                            </tr>
                         </tbody>
-                    </Wrapper>)}
-            </table>
+                        : (<Wrapper>
+                            <tbody>
+                                {this.createBody()}
+                            </tbody>
+                        </Wrapper>)}
+                </table>
+            </Wrapper>
         )
     }
 }
