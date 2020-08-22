@@ -1,0 +1,25 @@
+.table-pagination tr td button{
+    display: inline;
+    margin: 5px;
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid rgb(207, 207, 207);
+    outline: none;
+    direction: ltr;
+}
+.table-pagination tr td button:hover{
+    background-color: rgb(151, 151, 151);
+}
+.table-pagination tr td span{
+    margin: 0 10px;
+}
+.table-pagination tr td label{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    direction: ltr;
+}
+
+.table-pagination tr td{
+    position: relative;
+}

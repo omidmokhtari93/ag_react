@@ -3,6 +3,7 @@ import './Table.module.css'
 import http from 'axios';
 import Loading from '../Loading/Loading'
 import Wrapper from "../../Shared/Wrapper/Wrapper";
+import TablePagination from "./TablePagination/TablePagination";
 
 class Table extends Component {
     state = {
@@ -12,17 +13,25 @@ class Table extends Component {
         loadingStyle: {
             width: "30px",
             height: 'auto'
-        }
+        },
+        allPages: 0,
+        currentPage: 1
     }
 
     componentDidMount() {
-        this.fetchData()
+        this.gotoPage(1)
     }
 
-    fetchData = () => {
-        // this.setState({ loading: true })
-        // http.get('http://2.180.37.75/anbargol/api/getall?id=1485')
-        //     .then(x => this.setState({ body: x.data }))
+    fetchData = (currentPage) => {
+        this.setState({ loading: true })
+        let allowPagination = this.props.rowsInPage && this.props.allowPagination;
+        http.get(this.props.url, {
+            params: {
+                rowsInpage: !allowPagination ? 0 : this.props.rowsInPage,
+                pageNumber: currentPage
+            }
+        })
+            .then(x => this.setState({ body: x.data.rows, allPages: x.data.pagesCount }))
     }
 
     createBody = e => {
@@ -36,14 +45,19 @@ class Table extends Component {
         return tableBody;
     }
 
-    render() {
+    gotoPage = page => {
+        this.fetchData(page)
+        this.setState({ currentPage: page })
+        console.log(page)
+    }
 
+    render() {
         return (
             <Wrapper>
-                <div className="table-search">
-                    <as
+                {this.props.allowSearch && <div className="table-search">
+                    <span>جستجو</span>
                     <input type="text" />
-                </div>
+                </div>}
                 <table className="react-table">
                     <thead>
                         <tr>
@@ -66,6 +80,11 @@ class Table extends Component {
                                 {this.createBody()}
                             </tbody>
                         </Wrapper>)}
+                    <TablePagination
+                        colSpan={this.state.colSpan}
+                        pages={this.state.allPages}
+                        gotoPage={this.gotoPage}
+                        currentPage={this.state.currentPage} />
                 </table>
             </Wrapper>
         )

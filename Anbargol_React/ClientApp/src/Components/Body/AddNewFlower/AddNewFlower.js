@@ -68,7 +68,14 @@ class AddNewFlower extends Component {
                 <hr className="mt-0" />
                     Buttons Area
                 <hr className="mt-0" />
-                <Table dataSource={this.state.table} />
+                <Table
+                    dataSource={this.state.table}
+                    url="/api/GetGolTable"
+                    allowPagination={true}
+                    rowsInPage="2"
+                    allowEditButton={true}
+                    allowSearch={true}
+                />
             </Wrapper>
         )
     }

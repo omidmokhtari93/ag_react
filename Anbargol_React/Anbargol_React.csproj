@@ -22,9 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\FlowerControls\" />
-    <Folder Include="Controllers\FormsControls\" />
-    <Folder Include="Controllers\ItemsControls\" />
+    <Folder Include="Controllers\Forms\" />
+    <Folder Include="Controllers\Items\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
