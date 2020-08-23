@@ -1,18 +1,16 @@
 import React from 'react';
 import './Button.module.css';
+import * as buttonTypes from './ButtonTypes';
 
 const Buttons = props => {
-    let btns = Object.keys(props.options).map((btn, idx) => {
-        switch (btn) {
-            case "submit":
-                return <button key={idx} className="btn btn-md btn-primary" onClick={props.onSubmit}>ثبت</button>
-            case "edit":
-                return <button key={idx} className="btn btn-md btn-success" onClick={props.onEdit}>ویرایش</button>
-            case "cancel":
-                return <button key={idx} className="btn btn-md btn-danger" onClick={props.onCancel}>انصراف</button>
-            default:
-                return <button key={idx} className="btn btn-md btn-danger" onClick={props.default}>انجام</button>
-        }
+    let btns = Object.keys(props.elements).map((btn, idx) => {
+        let btnText = props.elements[btn].text;
+        let enable = props.elements[btn].enable;
+        return props.elements[btn].visible &&
+            <button key={idx} disabled={!enable}
+                className={'btn btn-md ' + props.elements[btn].className}
+                onClick={() => props.handleChange(btn)}>{btnText}</button>
+
     })
     return (
         <div className="control-buttons">
