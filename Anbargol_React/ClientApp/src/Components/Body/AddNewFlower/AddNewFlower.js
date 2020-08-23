@@ -9,7 +9,8 @@ import * as inputType from '../../../Shared/inputTypes';
 import Buttons from '../../../UI/Buttons/Button';
 import * as buttonTypes from '../../../UI/Buttons/ButtonTypes';
 import { CheckInputsValidation } from '../../../UI/Inputs/CheckInputsValidation';
-import { ButtonValidation } from '../../../UI/Buttons/ButtonValidation'
+import { ButtonActivation } from '../../../UI/Buttons/ButtonActivation';
+import { visibleButton } from '../../../UI/Buttons/ButtonActivation';
 
 class AddNewFlower extends Component {
     state = {
@@ -33,7 +34,7 @@ class AddNewFlower extends Component {
             elements: {
                 [buttonTypes.submit]: {
                     enable: false,
-                    visible: true,
+                    visible: false,
                     text: 'ثبت',
                     className: 'btn-primary'
                 },
@@ -55,18 +56,29 @@ class AddNewFlower extends Component {
         formIsValid: false
     }
 
+    componentDidMount() {
+        const elements = { ...this.state.buttons.elements };
+        elements[buttonTypes.cancel].visible = true;
+        elements[buttonTypes.edit].visible = true;
+        this.setState({ ...elements })
+    }
+
     handleChange = (name, value) => {
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
         updatedState.formIsValid = CheckInputsValidation(updatedState.inputs);
-        ButtonValidation(updatedState.buttons.elements, updatedState.formIsValid)
+        ButtonActivation(updatedState.buttons.elements, updatedState.formIsValid)
         this.setState({ ...updatedState });
     }
 
     handleButtonClick = type => {
-        if (type == buttonTypes.submit) {
-            console.log(type)
+        const elements = { ...this.state.buttons.elements };
+        if (type == buttonTypes.cancel) {
+            elements[buttonTypes.edit].visible = false;
+            elements[buttonTypes.cancel].visible = false;
+            elements[buttonTypes.submit].visible = true;
+            this.setState({ ...elements })
         }
     }
 
