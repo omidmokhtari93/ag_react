@@ -4,6 +4,7 @@ import http from 'axios';
 import Loading from '../Loading/Loading'
 import Wrapper from "../../Shared/Wrapper/Wrapper";
 import TablePagination from "./TablePagination/TablePagination";
+import TableSearch from "./TableSearch/TableSearch";
 
 class Table extends Component {
     state = {
@@ -24,7 +25,6 @@ class Table extends Component {
     }
 
     fetchData = (currentPage, key) => {
-
         this.setState({ loading: true })
         let allowPagination = (this.props.rowsInPage && this.props.allowPagination);
         http.get(this.props.url, {
@@ -52,18 +52,11 @@ class Table extends Component {
         this.fetchData(page, '')
     }
 
-    searchInTable = e => {
-        e === 'Enter' && this.fetchData(1, this.state.keyword)
-    }
-
     render() {
         return (
             <Wrapper>
-                {this.props.allowSearch && <div className="table-search" onKeyPress={e => this.searchInTable(e.key)}>
-                    <span>جستجو</span>
-                    <input type="text" value={this.state.keyword}
-                        onChange={e => this.setState({ keyword: e.target.value })} />
-                </div>}
+                <TableSearch enable={this.props.allowSearch}
+                    handleRequest={this.fetchData} />
                 <table className="react-table">
                     <thead>
                         <tr>
@@ -72,20 +65,17 @@ class Table extends Component {
                             })}
                         </tr>
                     </thead>
-                    {!this.state.body.length
-                        ? <tbody>
-                            <tr>
+                    <tbody>
+                        {!this.state.body.length
+                            ? (<tr>
                                 <td colSpan={this.state.colSpan}>
                                     <Loading show={this.state.loading}
                                         style={this.state.loadingStyle} />
                                 </td>
-                            </tr>
-                        </tbody>
-                        : (<Wrapper>
-                            <tbody>
-                                {this.createBody()}
-                            </tbody>
-                        </Wrapper>)}
+                            </tr>)
+                            : this.createBody()
+                        }
+                    </tbody>
                     <TablePagination
                         colSpan={this.state.colSpan}
                         pages={this.state.allPages}

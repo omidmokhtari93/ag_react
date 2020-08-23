@@ -49,7 +49,6 @@ class AddNewFlower extends Component {
     }
 
     handleChange = (name, value) => {
-        console.log(name, value)
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
@@ -73,8 +72,8 @@ class AddNewFlower extends Component {
                     url="/api/GetGolTable"
                     allowPagination={true}
                     rowsInPage="10"
-                    allowEditButton={true}
                     allowSearch={true}
+                    allowEditButton={true}
                 />
             </Wrapper>
         )
