@@ -21,21 +21,6 @@ class AddNewFlower extends Component {
             enterDate: { value: '', required: true, touched: true, type: inputType.date, label: "تاریخ ورود" },
             comment: { value: '', required: false, touched: false, type: inputType.textarea, label: "توضیحات" },
             imageFile: { value: '', required: false, touched: false, type: inputType.file, label: "تصویر گل" },
-            // searchBox: {
-            //     url: 'http://2.180.37.75/anbargol/api/search',
-            //     reqParam: ['name', 'code'],
-            //     resParam: ['GolName', 'Format', 'Color', 'ColorType', 'Code'],
-            //     id: 'Id',
-            //     placeholder: 'جستجو',
-            //     removeOnChoose: true,
-            //     timeout: '200',
-            //     value: '',
-            //     type: inputType.search,
-            //     label: 'جستجو',
-            //     required: true,
-            //     touched: false,
-            //     removeSelected: (name) => this.removeSearch(name)
-            // }
         },
         table: {
             header: [...table.TableGolHeaders],
