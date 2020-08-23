@@ -1,0 +1,10 @@
+.control-buttons {
+    padding: 10px;
+    border-top: 1px solid rgb(209, 209, 209);
+    border-bottom: 1px solid rgb(209, 209, 209);
+    margin-bottom: 15px;
+}
+
+.control-buttons button {
+    margin: 0 5px;
+}

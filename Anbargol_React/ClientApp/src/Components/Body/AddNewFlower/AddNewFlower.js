@@ -6,6 +6,7 @@ import FormBuilder from '../../../UI/FormBuilder/FormBuilder';
 import Table from '../../../UI/Table/Table';
 import * as table from '../../../UI/Table/TableUtility';
 import * as inputType from '../../../Shared/inputTypes';
+import Buttons from '../../../UI/Buttons/Button';
 
 class AddNewFlower extends Component {
     state = {
@@ -39,6 +40,11 @@ class AddNewFlower extends Component {
         table: {
             header: [...table.TableGolHeaders],
             body: [...table.TableGolBodies]
+        },
+        buttons: {
+            submit: true,
+            edit: false,
+            cancel: false
         }
     }
 
@@ -64,9 +70,7 @@ class AddNewFlower extends Component {
                     handleChange={this.handleChange}
                     column="3"
                 />
-                <hr className="mt-0" />
-                    Buttons Area
-                <hr className="mt-0" />
+                <Buttons options={this.state.buttons} />
                 <Table
                     creationData={this.state.table}
                     url="/api/GetGolTable"
