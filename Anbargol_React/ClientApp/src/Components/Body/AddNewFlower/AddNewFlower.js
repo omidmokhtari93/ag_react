@@ -72,7 +72,7 @@ class AddNewFlower extends Component {
                     creationData={this.state.table}
                     url="/api/GetGolTable"
                     allowPagination={true}
-                    rowsInPage="2"
+                    rowsInPage="10"
                     allowEditButton={true}
                     allowSearch={true}
                 />

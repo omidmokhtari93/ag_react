@@ -15,23 +15,25 @@ class Table extends Component {
             height: 'auto'
         },
         allPages: 0,
-        currentPage: 1
+        currentPage: 1,
+        keyword: ""
     }
 
     componentDidMount() {
         this.gotoPage(1)
     }
 
-    fetchData = (currentPage) => {
+    fetchData = (currentPage, key) => {
+
         this.setState({ loading: true })
-        let allowPagination = this.props.rowsInPage && this.props.allowPagination;
+        let allowPagination = (this.props.rowsInPage && this.props.allowPagination);
         http.get(this.props.url, {
             params: {
-                rowsInpage: !allowPagination ? 0 : this.props.rowsInPage,
+                key: key,
+                rowsInpage: allowPagination ? this.props.rowsInPage : 0,
                 pageNumber: currentPage
             }
-        })
-            .then(x => this.setState({ body: x.data.rows, allPages: x.data.pagesCount }))
+        }).then(x => this.setState({ body: x.data.rows, allPages: x.data.pagesCount, loading: false }))
     }
 
     createBody = e => {
@@ -46,17 +48,21 @@ class Table extends Component {
     }
 
     gotoPage = page => {
-        this.fetchData(page)
-        this.setState({ currentPage: page })
-        console.log(page)
+        this.setState({ currentPage: page, keyword: "" })
+        this.fetchData(page, '')
+    }
+
+    searchInTable = e => {
+        e === 'Enter' && this.fetchData(1, this.state.keyword)
     }
 
     render() {
         return (
             <Wrapper>
-                {this.props.allowSearch && <div className="table-search">
+                {this.props.allowSearch && <div className="table-search" onKeyPress={e => this.searchInTable(e.key)}>
                     <span>جستجو</span>
-                    <input type="text" />
+                    <input type="text" value={this.state.keyword}
+                        onChange={e => this.setState({ keyword: e.target.value })} />
                 </div>}
                 <table className="react-table">
                     <thead>
@@ -70,7 +76,7 @@ class Table extends Component {
                         ? <tbody>
                             <tr>
                                 <td colSpan={this.state.colSpan}>
-                                    <Loading show={true}
+                                    <Loading show={this.state.loading}
                                         style={this.state.loadingStyle} />
                                 </td>
                             </tr>
