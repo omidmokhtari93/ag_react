@@ -20,6 +20,10 @@
     word-wrap: break-word;
 }
 
+.react-table tr:hover {
+    background-color: rgb(202, 255, 202) !important;
+}
+
 .react-table tr th {
     padding: 2px 5px !important;
     font-size: 13px;
@@ -40,6 +44,7 @@
 .react-table td a {
     margin-top: 5px;
     color: blue !important;
+    cursor: pointer;
 }
 
 .react-table td span {
@@ -72,9 +77,11 @@
     font-size: 1rem;
     padding: 2px 5px;
 }
+
 .table-search input:focus {
     outline: none;
 }
+
 .table-search span {
     position: absolute;
     right: 9px;

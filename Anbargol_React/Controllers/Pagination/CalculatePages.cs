@@ -7,16 +7,27 @@ using Anbargol_React.Controllers.GetConnection;
 
 namespace Anbargol_React.Controllers.Pagination
 {
-    public class CalculatePages
+    public class Calculate
     {
         public GetConnction conn = new GetConnction();
-        public int Calc(string table, int rowsInPage)
+        public ThisClass RowsAndPages(string table, int rowsInPage)
         {
             conn.Flower.Open();
             var cmd = new SqlCommand("select count(*) from " + table, conn.Flower);
             var rows = Convert.ToDecimal(cmd.ExecuteScalar());
             conn.Flower.Close();
-            return Convert.ToInt32(Math.Ceiling(rows / (rowsInPage == 0 ? rows : rowsInPage)));
+            return new ThisClass()
+            {
+                Rows = rowsInPage == 0 ? rows : rowsInPage,
+                Pages = Math.Ceiling(rows / (rowsInPage == 0 ? rows : rowsInPage))
+            };
+            
         }
+    }
+
+    public class ThisClass
+    {
+        public decimal Rows { get; set; }
+        public decimal Pages { get; set; }
     }
 }

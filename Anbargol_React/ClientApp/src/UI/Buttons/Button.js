@@ -4,12 +4,10 @@ import * as buttonTypes from './ButtonTypes';
 
 const Buttons = props => {
     let btns = Object.keys(props.elements).map((btn, idx) => {
-        let btnText = props.elements[btn].text;
-        let enable = props.elements[btn].enable;
         return props.elements[btn].visible &&
-            <button key={idx} disabled={!enable}
+            <button key={idx} disabled={!props.elements[btn].enable}
                 className={'btn btn-md ' + props.elements[btn].className}
-                onClick={() => props.handleChange(btn)}>{btnText}</button>
+                onClick={() => props.handleChange(btn)}>{props.elements[btn].text}</button>
 
     })
     return (

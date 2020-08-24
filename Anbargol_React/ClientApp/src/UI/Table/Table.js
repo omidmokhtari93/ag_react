@@ -10,7 +10,7 @@ class Table extends Component {
     state = {
         body: [],
         loading: false,
-        colSpan: this.props.creationData.header.length,
+        colSpan: this.props.creationData.header.length + (this.props.buttons ? Object.keys(this.props.buttons).length : 0),
         loadingStyle: {
             width: "30px",
             height: 'auto'
@@ -26,14 +26,16 @@ class Table extends Component {
 
     fetchData = (currentPage, key) => {
         this.setState({ loading: true })
-        let allowPagination = (this.props.rowsInPage && this.props.allowPagination);
+        let allowPagination = (this.props.rowsInPage > 0 && this.props.allowPagination);
         http.get(this.props.url, {
             params: {
                 key: key,
                 rowsInpage: allowPagination ? this.props.rowsInPage : 0,
                 pageNumber: currentPage
             }
-        }).then(x => this.setState({ body: x.data.rows, allPages: x.data.pagesCount, loading: false }))
+        }).then(x => {
+            this.setState({ body: x.data.rows, allPages: x.data.pagesCount, loading: false })
+        })
     }
 
     createBody = e => {
@@ -42,7 +44,14 @@ class Table extends Component {
         const tableBody = []
         for (let i = 0; i < serverDataLength; i++) {
             const td = body.map((x, idx) => <td key={idx}>{this.state.body[i][x]}</td>);
-            tableBody.push(<tr key={i}>{td}</tr>)
+            const buttons = this.props.buttons && Object.keys(this.props.buttons).map(btn => {
+                return <td key={btn + i}>
+                    <a onClick={() => this.props.tableClick(btn, this.state.body[i].id)}>
+                        {this.props.buttons[btn]}
+                    </a>
+                </td>
+            })
+            tableBody.push(<tr key={i}>{td}{buttons}</tr>)
         }
         return tableBody;
     }
@@ -63,6 +72,7 @@ class Table extends Component {
                             {this.props.creationData.header.map((x, idx) => {
                                 return <th key={idx}>{x}</th>
                             })}
+                            {this.props.buttons && Object.keys(this.props.buttons).map(x => <th key={x + 100}></th>)}
                         </tr>
                     </thead>
                     <tbody>
@@ -76,11 +86,11 @@ class Table extends Component {
                             : this.createBody()
                         }
                     </tbody>
-                    <TablePagination
+                    {this.props.allowPagination && <TablePagination
                         colSpan={this.state.colSpan}
                         pages={this.state.allPages}
                         gotoPage={this.gotoPage}
-                        currentPage={this.state.currentPage} />
+                        currentPage={this.state.currentPage} />}
                 </table>
             </Wrapper>
         )

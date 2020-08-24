@@ -8,17 +8,20 @@ using Anbargol_React.Controllers.GetConnection;
 using Anbargol_React.Controllers.Pagination;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Anbargol_React.Controllers.Flower.Tables {
-    [Route ("api/[controller]")]
-    public class FlowerTable : Controller {
-        public GetConnction con = new GetConnction ();
-        public CalculatePages calculatePages = new CalculatePages ();
+namespace Anbargol_React.Controllers.Flower.Tables
+{
+    [Route("api/[controller]")]
+    public class FlowerTable : Controller
+    {
+        public GetConnction con = new GetConnction();
+        public Calculate calculate = new Calculate();
 
-        [HttpGet ("/api/GetGolTable")]
-        public IActionResult Get (int rowsInPage, string key = "", int pageNumber = 1) {
-            con.Flower.Open ();
-            var pagesCount = calculatePages.Calc ("flower_entry", rowsInPage); // mohasebe tedad safahat
-            var cmd = new SqlCommand ("select * from (select ROW_NUMBER() OVER (Order by j.Id desc) as rn , * from " +
+        [HttpGet("/api/GetGolTable")]
+        public IActionResult Get(int rowsInPage, string key = "", int pageNumber = 1)
+        {
+            con.Flower.Open();
+            var rowsAndPages = calculate.RowsAndPages("flower_entry", rowsInPage); // mohasebe tedad safahat
+            var cmd = new SqlCommand("select * from (select ROW_NUMBER() OVER (Order by j.Id desc) as rn , * from " +
                 "(SELECT flower_entry.flower_name, flower_entry.flower_code, flower_colors.flow_color, " +
                 "flower_colortypes.flow_colortype, flower_formats.flow_format, " +
                 "flower_customers.customer_name, flower_companies.company_name, " +
@@ -32,30 +35,33 @@ namespace Anbargol_React.Controllers.Flower.Tables {
                 "ON flower_entry.company_name = flower_companies.company_id INNER JOIN flower_colors " +
                 "ON flower_entry.flower_color = flower_colors.flowcolor_id) as j)i " +
                 (key == null ?
-                    (" where i.rn > ((" + pageNumber + " - 1) * " + rowsInPage + ") " +
-                        " and i.rn <= (" + pageNumber + " * " + rowsInPage + ")") :
+                    (" where i.rn > ((" + pageNumber + " - 1) * " + rowsAndPages.Rows + ") " +
+                        " and i.rn <= (" + pageNumber + " * " + rowsAndPages.Rows + ")") :
                     (" where (i.flower_name like N'%" + key + "%' or '" + key + "' = '') " +
                         " or (i.flower_code like N'%" + key + "%' or '" + key + "' = '') ")) + " order by i.id desc", con.Flower);
-            var rd = cmd.ExecuteReader ();
-            var gols = new List<Gol> ();
-            while (rd.Read ()) {
-                gols.Add (new Gol () {
-                    Id = Convert.ToInt32 (rd["id"]),
-                        GolName = rd["flower_name"].ToString (),
-                        Color = rd["flow_color"].ToString (),
-                        ColorType = rd["flow_colortype"].ToString (),
-                        Format = rd["flow_format"].ToString (),
-                        Code = rd["flower_code"].ToString (),
-                        EnterDate = rd["enter_date"].ToString (),
-                        Customer = rd["customer_name"].ToString (),
-                        Company = rd["company_name"].ToString (),
-                        Comment = rd["comment"].ToString ()
+            var rd = cmd.ExecuteReader();
+            var gols = new List<Gol>();
+            while (rd.Read())
+            {
+                gols.Add(new Gol()
+                {
+                    Id = Convert.ToInt32(rd["id"]),
+                    GolName = rd["flower_name"].ToString(),
+                    Color = rd["flow_color"].ToString(),
+                    ColorType = rd["flow_colortype"].ToString(),
+                    Format = rd["flow_format"].ToString(),
+                    Code = rd["flower_code"].ToString(),
+                    EnterDate = rd["enter_date"].ToString(),
+                    Customer = rd["customer_name"].ToString(),
+                    Company = rd["company_name"].ToString(),
+                    Comment = rd["comment"].ToString()
                 });
             }
-            con.Flower.Close ();
-            return Json (new {
+            con.Flower.Close();
+            return Json(new
+            {
                 rows = gols,
-                    pagesCount = pagesCount
+                pagesCount = rowsAndPages.Pages
             });
         }
     }

@@ -1,4 +1,5 @@
 import * as  buttonTypes from './ButtonTypes';
+import { object } from 'prop-types';
 
 // this property active button after validate form
 export const ButtonActivation = (buttons, formValidity) => {
@@ -11,6 +12,8 @@ export const ButtonActivation = (buttons, formValidity) => {
 
 //this property enable button by passing type to it
 export const visibleButton = (buttons, type) => {
-    buttons[type].visible = true;
+    Object.keys(buttons).filter(x => {
+        (type.indexOf(x) < 0) ? (buttons[x].visible = false) : (buttons[x].visible = true)
+    })
     return buttons;
 }

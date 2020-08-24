@@ -1,3 +1,5 @@
+import http from 'axios';
+
 export const SEARCH_GOL = "SEARCH_GOL";
 export const SHOW_LOADING = "SHOW_LOADING";
 export const HIDE_LOADING = "HIDE_LOADING";
@@ -11,9 +13,9 @@ export const searchGolResult = (res) => {
 }
 export const apiSearchGol = (key, url) => {
     return dispatch => {
-        fetch(url + '?name=' + key + '&code= ' + key)
-            .then(response => response.json())
-            .then(json => dispatch(searchGolResult(json)))
+        http.get(url, { params: { name: key, code: key } }).then(resp => {
+            dispatch(searchGolResult(resp.data))
+        })
     }
 }
 

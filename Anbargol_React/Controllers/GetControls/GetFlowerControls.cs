@@ -18,15 +18,16 @@ namespace Anbargol_React.Controllers
         {
             var con = GetConnction.Flower;
             con.Open();
-            var items = new List<Controls>();
-            var cm = new SqlCommand("select item_id as id ,item_name as name FROM items where item_id <> 0 order by item_name " +
+            var color = new List<Controls>();
+            var cm = new SqlCommand("SELECT flowcolor_id as id ,flow_color as name FROM flower_colors " +
                                     "select flowformat_id as id, flow_format as name from flower_formats " +
                                     "select customer_id as id, customer_name as name from flower_customers " +
-                                    "select company_id  as id, company_name as name from flower_companies", con);
+                                    "select company_id  as id, company_name as name from flower_companies " +
+                                    "SELECT colortype_id as id ,flow_colortype as name FROM flower_colortypes", con);
             var r = cm.ExecuteReader();
             while (r.Read())
             {
-                items.Add(new Controls()
+                color.Add(new Controls()
                 {
                     Id = Convert.ToInt32(r["id"]),
                     Name = r["name"].ToString()
@@ -62,13 +63,24 @@ namespace Anbargol_React.Controllers
                     Name = r["name"].ToString()
                 });
             }
+            r.NextResult();
+            var colorType = new List<Controls>();
+            while (r.Read())
+            {
+                colorType.Add(new Controls()
+                {
+                    Id = Convert.ToInt32(r["id"]),
+                    Name = r["name"].ToString()
+                });
+            }
             con.Close();
             return Json(new
             {
-                items = items,
-                format = format,
-                customer = customer,
-                compnay = company
+                colors = color,
+                formats = format,
+                customers = customer,
+                companies = company,
+                colorTypes = colorType
             });
         }
     }

@@ -11,30 +11,43 @@ import * as buttonTypes from '../../../UI/Buttons/ButtonTypes';
 import { CheckInputsValidation } from '../../../UI/Inputs/CheckInputsValidation';
 import { ButtonActivation } from '../../../UI/Buttons/ButtonActivation';
 import { visibleButton } from '../../../UI/Buttons/ButtonActivation';
+import http from 'axios';
 
 class AddNewFlower extends Component {
     state = {
         inputs: {
             name: { value: '', required: true, touched: false, type: inputType.text, label: "نام گل" },
             code: { value: '', required: true, touched: false, type: inputType.text, label: "کد گل" },
-            format: { value: '', required: true, touched: false, type: inputType.select, label: "قالب", options: [{ name: 'louse', id: 555 }, { name: 'name2', id: 52 }] },
-            color: { value: '', required: true, touched: false, type: inputType.select, label: "رنگ", options: [{ name: 'louse', id: 555 }, { name: 'name2', id: 52 }] },
-            colorType: { value: '', required: true, touched: false, type: inputType.select, label: "نوع رنگ", options: [{ name: 'louse', id: 555 }, { name: 'name2', id: 52 }] },
-            customer: { value: '', required: true, touched: false, type: inputType.select, label: "مشتری", options: [{ name: 'louse', id: 555 }, { name: 'name2', id: 52 }] },
-            company: { value: '', required: true, touched: false, type: inputType.select, label: "شرکت", options: [{ name: 'louse', id: 555 }, { name: 'name2', id: 52 }] },
+            format: { value: '', required: true, touched: false, type: inputType.select, label: "قالب", options: [] },
+            color: { value: '', required: true, touched: false, type: inputType.select, label: "رنگ", options: [] },
+            colorType: { value: '', required: true, touched: false, type: inputType.select, label: "نوع رنگ", options: [] },
+            customer: { value: '', required: true, touched: false, type: inputType.select, label: "مشتری", options: [] },
+            company: { value: '', required: true, touched: false, type: inputType.select, label: "شرکت", options: [] },
             enterDate: { value: '', required: true, touched: true, type: inputType.date, label: "تاریخ ورود" },
             comment: { value: '', required: false, touched: false, type: inputType.textarea, label: "توضیحات" },
             imageFile: { value: '', required: false, touched: false, type: inputType.file, label: "تصویر گل" },
         },
         table: {
-            header: [...table.TableGolHeaders],
-            body: [...table.TableGolBodies]
+            creationData: {
+                header: [...table.TableGolHeaders],
+                body: [...table.TableGolBodies],
+            },
+            url: "/api/GetGolTable",
+            allowPagination: true,
+            rowsInPage: "10",
+            allowSearch: false,
+            buttons: {
+                copy: 'کپی گل',
+                sabtForm: 'ثبت چیدمان',
+                edit: 'ویرایش'
+            },
+            tableClick: (key, id) => this.handleTableButtonsClick(key, id)
         },
         buttons: {
             elements: {
                 [buttonTypes.submit]: {
                     enable: false,
-                    visible: false,
+                    visible: true,
                     text: 'ثبت',
                     className: 'btn-primary'
                 },
@@ -57,10 +70,25 @@ class AddNewFlower extends Component {
     }
 
     componentDidMount() {
-        const elements = { ...this.state.buttons.elements };
-        elements[buttonTypes.cancel].visible = true;
-        elements[buttonTypes.edit].visible = true;
-        this.setState({ ...elements })
+        this.getControls();
+        // const elements = { ...this.state.buttons.elements };
+        // this.setState({ ...visibleButton(elements, [buttonTypes.cancel, buttonTypes.edit]) })
+    }
+
+    getControls = e => {
+        let inputs = { ...this.state.inputs }
+        http.get('/api/GetGolControls').then(x => {
+            inputs.color.options = x.data.colors
+            inputs.colorType.options = x.data.colorTypes
+            inputs.format.options = x.data.formats
+            inputs.customer.options = x.data.customers
+            inputs.company.options = x.data.companies
+            this.setState({ ...inputs })
+        })
+    }
+
+    handleTableButtonsClick = (key, id) => {
+        console.log(key, id)
     }
 
     handleChange = (name, value) => {
@@ -74,11 +102,12 @@ class AddNewFlower extends Component {
 
     handleButtonClick = type => {
         const elements = { ...this.state.buttons.elements };
-        if (type == buttonTypes.cancel) {
-            elements[buttonTypes.edit].visible = false;
-            elements[buttonTypes.cancel].visible = false;
-            elements[buttonTypes.submit].visible = true;
-            this.setState({ ...elements })
+        switch (type) {
+            case buttonTypes.cancel:
+                this.setState({ ...visibleButton(elements, buttonTypes.submit) })
+            case buttonTypes.submit:
+                
+
         }
     }
 
@@ -92,21 +121,14 @@ class AddNewFlower extends Component {
                     column="3"
                 />
                 <Buttons {...this.state.buttons} />
-                <Table
-                    creationData={this.state.table}
-                    url="/api/GetGolTable"
-                    allowPagination={true}
-                    rowsInPage="4"
-                    allowSearch={true}
-                    allowEditButton={true}
-                />
+                <Table {...this.state.table} />
             </Wrapper>
         )
     }
 }
 const mapStateToProps = state => {
     return {
-        omid: state.result
+        result: ''
     }
 }
 
