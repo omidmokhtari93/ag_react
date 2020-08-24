@@ -70,6 +70,7 @@ class AddNewFlower extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         this.getControls();
         // const elements = { ...this.state.buttons.elements };
         // this.setState({ ...visibleButton(elements, [buttonTypes.cancel, buttonTypes.edit]) })
