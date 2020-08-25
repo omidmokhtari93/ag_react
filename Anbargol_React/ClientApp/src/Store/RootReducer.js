@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
 import SearchBoxRedcuder from './Reducers/SearchBoxReducer';
-import GetControlsReducer from './Reducers/GetControlsReducer';
+import AddFlowerReducer from './Reducers/AddFlowerReducer'
 
+const RootReducer = combineReducers({
+    AddNew: AddFlowerReducer,
+})
 
-// const RootReducer = combineReducers({
-//     searchBox: SearchBoxRedcuder,
-//     golControls: GetControlsReducer
-// })
-
-const RootReducer = GetControlsReducer;
+//const RootReducer = AddFlowerReducer;
 
 export default RootReducer;

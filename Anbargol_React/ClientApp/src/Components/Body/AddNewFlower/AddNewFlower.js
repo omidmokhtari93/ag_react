@@ -12,6 +12,7 @@ import { CheckInputsValidation } from '../../../UI/Inputs/CheckInputsValidation'
 import { ButtonActivation } from '../../../UI/Buttons/ButtonActivation';
 import { visibleButton } from '../../../UI/Buttons/ButtonActivation';
 import http from 'axios';
+import * as actions from '../../../Store/Actions/AddFlowerActions';
 
 class AddNewFlower extends Component {
     state = {
@@ -70,7 +71,6 @@ class AddNewFlower extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         this.getControls();
         // const elements = { ...this.state.buttons.elements };
         // this.setState({ ...visibleButton(elements, [buttonTypes.cancel, buttonTypes.edit]) })
@@ -89,7 +89,7 @@ class AddNewFlower extends Component {
     }
 
     handleTableButtonsClick = (key, id) => {
-        console.log(key, id)
+        this.props.storeFlowerId(id)
     }
 
     handleChange = (name, value) => {
@@ -107,7 +107,7 @@ class AddNewFlower extends Component {
             case buttonTypes.cancel:
                 this.setState({ ...visibleButton(elements, buttonTypes.submit) })
             case buttonTypes.submit:
-                
+
 
         }
     }
@@ -129,8 +129,14 @@ class AddNewFlower extends Component {
 }
 const mapStateToProps = state => {
     return {
-        result: ''
+        flower_id: state.AddNew.flower_id
     }
 }
 
-export default connect(mapStateToProps)(AddNewFlower);
+const mapDispatchToProps = dispatch => {
+    return {
+        storeFlowerId: (id) => dispatch(actions.store(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewFlower);
