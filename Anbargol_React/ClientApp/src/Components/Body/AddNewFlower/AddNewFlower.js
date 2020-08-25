@@ -111,7 +111,6 @@ class AddNewFlower extends Component {
     }
 
     render() {
-        console.log(this.props.flower_id)
         return (
             <Wrapper>
                 <ComponentsHeader>ثبت گل جدید</ComponentsHeader>
