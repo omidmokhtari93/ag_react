@@ -66,32 +66,34 @@ class Table extends Component {
             <Wrapper>
                 <TableSearch enable={this.props.allowSearch}
                     handleRequest={this.fetchData} />
-                <table className="react-table">
-                    <thead>
-                        <tr>
-                            {this.props.creationData.header.map((x, idx) => {
-                                return <th key={idx}>{x}</th>
-                            })}
-                            {this.props.buttons && Object.keys(this.props.buttons).map(x => <th key={x + 100}></th>)}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {!this.state.body.length
-                            ? (<tr>
-                                <td colSpan={this.state.colSpan}>
-                                    <Loading show={this.state.loading}
-                                        style={this.state.loadingStyle} />
-                                </td>
-                            </tr>)
-                            : this.createBody()
-                        }
-                    </tbody>
-                    {this.props.allowPagination && <TablePagination
-                        colSpan={this.state.colSpan}
-                        pages={this.state.allPages}
-                        gotoPage={this.gotoPage}
-                        currentPage={this.state.currentPage} />}
-                </table>
+                <div className="table-responsive">
+                    <table className="react-table">
+                        <thead>
+                            <tr>
+                                {this.props.creationData.header.map((x, idx) => {
+                                    return <th key={idx}>{x}</th>
+                                })}
+                                {this.props.buttons && Object.keys(this.props.buttons).map(x => <th key={x + 100}></th>)}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {!this.state.body.length
+                                ? (<tr>
+                                    <td colSpan={this.state.colSpan}>
+                                        <Loading show={this.state.loading}
+                                            style={this.state.loadingStyle} />
+                                    </td>
+                                </tr>)
+                                : this.createBody()
+                            }
+                        </tbody>
+                        {this.props.allowPagination && <TablePagination
+                            colSpan={this.state.colSpan}
+                            pages={this.state.allPages}
+                            gotoPage={this.gotoPage}
+                            currentPage={this.state.currentPage} />}
+                    </table>
+                </div>
             </Wrapper>
         )
     }
