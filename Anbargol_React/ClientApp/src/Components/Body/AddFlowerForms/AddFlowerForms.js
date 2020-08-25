@@ -28,7 +28,7 @@ class AddFlowerForms extends Component {
                 header: [...table.TableGolHeaders],
                 body: [...table.TableGolBodies],
             },
-            url: "/api/GetGolTable",
+            url: "/nothing",
             allowPagination: true,
             rowsInPage: "10",
             allowSearch: false,

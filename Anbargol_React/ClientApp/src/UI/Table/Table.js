@@ -34,7 +34,7 @@ class Table extends Component {
                 pageNumber: currentPage
             }
         }).then(x => {
-            this.setState({ body: x.data.rows, allPages: x.data.pagesCount, loading: false })
+            this.setState({ body: [...x.data.rows], allPages: x.data.pagesCount, loading: false })
         })
     }
 

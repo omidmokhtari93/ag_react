@@ -22,7 +22,6 @@ class FlowerInformation extends Component {
     }
 
     getData = e => {
-        console.log(this.props.flowerId)
         this.props.flowerId && http.get('/api/SearchGol', {
             params: {
                 name: '',
