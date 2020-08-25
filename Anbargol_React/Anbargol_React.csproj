@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Forms\" />
     <Folder Include="Controllers\Items\" />
   </ItemGroup>
 
