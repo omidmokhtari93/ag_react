@@ -1,10 +1,10 @@
-import * as actions from '../Actions/AddFlowerActions';
+import * as actions from '../Actions/StoreFlowerIdActions';
 
 const initialState = {
     flower_id: 0
 }
 
-const AddFlowerReducer = (state = initialState, action) => {
+const StoreFlowerIdReducer = (state = initialState, action) => {
     switch (action.type) {
         case actions.STORE_FLOWER_ID:
             return {
@@ -15,4 +15,4 @@ const AddFlowerReducer = (state = initialState, action) => {
     }
 }
 
-export default AddFlowerReducer;
+export default StoreFlowerIdReducer;

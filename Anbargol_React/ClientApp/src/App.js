@@ -13,7 +13,7 @@ export default class App extends Component {
         <Navbar />
         <div className="container sans p-4 border">
           <Route path="/addnew" exact render={() => <AddNewFlower />} />
-          <Route path="/addforms" exact render={() => <AddFlowerForms />} />
+          <Route path="/" exact render={() => <AddFlowerForms />} />
         </div>
       </Wrapper>
     );

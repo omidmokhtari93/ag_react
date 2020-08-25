@@ -12,7 +12,7 @@ import { CheckInputsValidation } from '../../../UI/Inputs/CheckInputsValidation'
 import { ButtonActivation } from '../../../UI/Buttons/ButtonActivation';
 import { visibleButton } from '../../../UI/Buttons/ButtonActivation';
 import http from 'axios';
-import * as actions from '../../../Store/Actions/AddFlowerActions';
+import * as actions from '../../../Store/Actions/StoreFlowerIdActions';
 
 class AddNewFlower extends Component {
     state = {
@@ -36,7 +36,7 @@ class AddNewFlower extends Component {
             url: "/api/GetGolTable",
             allowPagination: true,
             rowsInPage: "10",
-            allowSearch: false,
+            allowSearch: true,
             buttons: {
                 copy: 'کپی گل',
                 sabtForm: 'ثبت چیدمان',
@@ -66,8 +66,7 @@ class AddNewFlower extends Component {
                 }
             },
             handleChange: (type) => this.handleButtonClick(type)
-        },
-        formIsValid: false
+        }
     }
 
     componentDidMount() {
@@ -96,8 +95,7 @@ class AddNewFlower extends Component {
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
-        updatedState.formIsValid = CheckInputsValidation(updatedState.inputs);
-        ButtonActivation(updatedState.buttons.elements, updatedState.formIsValid)
+        ButtonActivation(updatedState.buttons.elements, CheckInputsValidation(updatedState.inputs))
         this.setState({ ...updatedState });
     }
 
@@ -113,6 +111,7 @@ class AddNewFlower extends Component {
     }
 
     render() {
+        console.log(this.props.flower_id)
         return (
             <Wrapper>
                 <ComponentsHeader>ثبت گل جدید</ComponentsHeader>
@@ -129,7 +128,7 @@ class AddNewFlower extends Component {
 }
 const mapStateToProps = state => {
     return {
-        flower_id: state.AddNew.flower_id
+        flower_id: state.storeFlowerId.flower_id
     }
 }
 
