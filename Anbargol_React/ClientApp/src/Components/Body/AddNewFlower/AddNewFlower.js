@@ -13,6 +13,7 @@ import { ButtonActivation } from '../../../UI/Buttons/ButtonActivation';
 import { visibleButton } from '../../../UI/Buttons/ButtonActivation';
 import http from 'axios';
 import * as actions from '../../../Store/Actions/StoreFlowerIdActions';
+import { withRouter } from 'react-router-dom';
 
 class AddNewFlower extends Component {
     state = {
@@ -88,7 +89,10 @@ class AddNewFlower extends Component {
     }
 
     handleTableButtonsClick = (key, id) => {
-        this.props.storeFlowerId(id)
+        if (key == 'sabtForm') {
+            this.props.storeFlowerId(id)
+            this.props.history.push('/addforms')
+        }
     }
 
     handleChange = (name, value) => {
@@ -137,4 +141,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNewFlower);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddNewFlower));
