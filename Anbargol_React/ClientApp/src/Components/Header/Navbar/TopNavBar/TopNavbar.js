@@ -10,7 +10,19 @@ import SearchBoxNoRedux from '../../../../UI/SearchBox/SearchBox_NonRedux';
 class Navbar extends Component {
     state = {
         showSideBar: false,
-        searchBoxValue: ''
+        searhcBox: {
+            url: "/api/SearchGol",
+            reqParam: ['name', 'code'], //request parameters
+            resParam: ['golName', 'format', 'color', 'colorType', 'code'], //response parameters
+            id: "Id", //this identity related choosen item in dropdown
+            width: "25",
+            placeholder: "جستجوی سریع گل",
+            handleResponse: (res) => this.handleSearch(res), // return an object contain Flower Name and Flower Id
+            removeOnChoose: false,
+            timeout: "400",
+            name: "searchbox",
+            searchBoxValue: '',
+        }
     }
 
     handleShowSideBar = (e) => {
@@ -33,17 +45,7 @@ class Navbar extends Component {
                         <NavBarItems />
                     </ul>
                     <SearchBoxNoRedux
-                        url="http://2.180.37.75/anbargol/api/search"
-                        reqParam={['name', 'code']} //request parameters
-                        resParam={['GolName', 'Format', 'Color', 'ColorType', 'Code']} //response parameters
-                        id="Id" //this identity related choosen item in dropdown
-                        width="25"
-                        placeholder="جستجوی سریع گل"
-                        handleResponse={this.handleSearch} // return an object contain Flower Name and Flower Id
-                        removeOnChoose={false}
-                        timeout="200"
-                        name="searchbox"
-                        value={this.state.searchBoxValue}
+                        {...this.state.searhcBox}
                     />
                     <ShowButton show={this.handleShowSideBar} />
                 </nav>

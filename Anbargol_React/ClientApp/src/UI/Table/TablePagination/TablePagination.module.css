@@ -23,3 +23,6 @@
 .table-pagination tr td{
     position: relative;
 }
+.table-pagination tr:hover {
+    background-color: #f7f6fe !important;
+}
