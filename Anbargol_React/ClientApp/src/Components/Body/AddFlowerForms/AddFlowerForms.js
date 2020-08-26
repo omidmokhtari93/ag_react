@@ -18,25 +18,26 @@ class AddFlowerForms extends Component {
             formNumber: { value: '', required: true, touched: false, type: inputType.text, label: "شماره فرم" },
             arrangeType: { value: '', required: true, touched: false, type: inputType.select, label: "نوع چیدمان", options: [{ name: 'سرویسی', id: 1 }, { name: 'فله', id: 2 }] },
             dimension: { value: '', required: true, touched: false, type: inputType.select, label: "ابعاد", options: [{ name: 'سرویسی', id: 1 }, { name: 'فله', id: 2 }] },
-            formsCount: { value: '', required: true, touched: false, type: inputType.text, label: "تعداد برگ" },
+            formsCount: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد برگ" },
             mark: { value: '', required: false, touched: false, type: inputType.text, label: "نوع مارک" },
             EnterDate: { value: '', required: true, touched: false, type: inputType.date, label: "تاریخ ورود" },
             comment: { value: '', required: false, touched: false, type: inputType.text, label: "توضیحات" }
         },
         table: {
             creationData: {
-                header: [...table.TableGolHeaders],
-                body: [...table.TableGolBodies],
+                header: [...table.TableFormsHeaders],
+                body: [...table.TableFormsBodies],
             },
-            url: "/nothing",
-            allowPagination: true,
-            rowsInPage: "10",
+            url: "/api/GetFlowerForms?flowerId=" + this.props.flower_id,
+            allowPagination: false,
             allowSearch: false,
             buttons: {
-                delete: 'حذف',
+                edit: 'ویرایش',
+                delete: 'حذف'
             },
             tableClick: (key, id) => this.handleTableButtonsClick(key, id)
         },
+
         buttons: {
             elements: {
                 [buttonTypes.submit]: {
@@ -62,6 +63,10 @@ class AddFlowerForms extends Component {
         }
     }
 
+    handleTableButtonsClick = (key, id) => {
+        console.log(key, id)
+    }
+
     handleChange = (name, value) => {
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
@@ -78,7 +83,7 @@ class AddFlowerForms extends Component {
         return (
             <Wrapper>
                 <ComponentsHeader>ثبت فرم ها</ComponentsHeader>
-                <FlowerInformation flowerId={this.props.flower_id}/>
+                <FlowerInformation flowerId={this.props.flower_id} />
                 <FormBuilder
                     inputs={this.state.inputs}
                     handleChange={this.handleChange}

@@ -16,7 +16,7 @@ namespace Anbargol_React.Controllers.Forms.Tables
     {
         public GetConnction con = new GetConnction();
         [HttpGet("/api/GetFlowerForms")]
-        public IActionResult Get()
+        public IActionResult Get(int flowerId)
         {
             con.Flower.Open();
             var forms = new List<FormsClass>();
@@ -25,26 +25,32 @@ namespace Anbargol_React.Controllers.Forms.Tables
                                      "flower_forms_entry.sheetcount, flower_forms_entry.mark_type, " +
                                      "flower_forms_entry.comment, flower_forms_entry.id, " +
                                      "flower_forms_entry.flower_id, flower_forms_entry.last_enter_date " +
-                                    "FROM flower_forms_entry INNER JOIN arrange_type " +
-                                    " ON flower_forms_entry.arrange_type = arrange_type.arrange_id " +
-                                    "INNER JOIN flower_dimensions ON flower_forms_entry.dimension = flower_dimensions.dimension_id " +
-                                    "WHERE(flower_forms_entry.flower_id = 2499) ORDER BY flower_forms_entry.form_number", con.Flower);
+                                     "FROM flower_forms_entry INNER JOIN arrange_type " +
+                                     " ON flower_forms_entry.arrange_type = arrange_type.arrange_id " +
+                                     "INNER JOIN flower_dimensions ON flower_forms_entry.dimension = flower_dimensions.dimension_id " +
+                                     "WHERE(flower_forms_entry.flower_id = " + flowerId + ") " +
+                                     "ORDER BY flower_forms_entry.form_number", con.Flower);
             var rd = cmd.ExecuteReader();
-            if (rd.Read())
+            while (rd.Read())
             {
                 forms.Add(new FormsClass()
                 {
+                    Id = Convert.ToInt32(rd["id"]),
                     FormName = rd["form_number"].ToString(),
-                    ArrangeType = rd["arrangetype"].ToString(),
-                    Dimension = rd["dimension"].ToString(),
+                    ArrangeType = rd["arrange_type"].ToString(),
+                    Dimension = rd["flow_dimension"].ToString(),
                     Count = Convert.ToInt32(rd["sheetcount"]),
-                    Mark = rd["mark"].ToString(),
+                    Mark = rd["mark_type"].ToString(),
                     Comment = rd["comment"].ToString(),
                     EnterDate = rd["last_enter_date"].ToString(),
                 });
             }
             con.Flower.Close();
-            return Json(123);
+            return Json(new
+            {
+                rows = forms,
+                pagesCount = 1
+            });
         }
     }
 }

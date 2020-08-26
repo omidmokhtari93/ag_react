@@ -15,6 +15,9 @@ const Input = props => {
         switch (props.type) {
             case inputTypes.text:
                 return <input {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
+            case inputTypes.number:
+                return <input {...attr} type={inputTypes.number} style={{ textAlign: 'center' }}
+                    onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
             case inputTypes.select:
                 return <select {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)}>
                     <option value="">انتخاب کنید</option>
