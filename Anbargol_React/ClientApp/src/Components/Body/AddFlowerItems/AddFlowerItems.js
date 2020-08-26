@@ -82,7 +82,7 @@ class AddFlowerItems extends Component {
             <Wrapper>
                 <ComponentsHeader>ثبت آیتم ها</ComponentsHeader>
                 <FlowerInformation flowerId={this.props.flower_id} />
-                <div>
+                <div style={{paddingLeft : '20rem'}}>
                     <DropDownControl />
                 </div>
                 <FormBuilder

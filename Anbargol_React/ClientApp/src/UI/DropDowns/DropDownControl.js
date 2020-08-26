@@ -25,15 +25,19 @@ class DropDownControl extends Component {
 
     render() {
         return (
-            <Wrapper>
-                <div className="drop-down-control">
-                    <div style={{ marginLeft: '30%' }}>
-                        <Input {...this.state} />
-                    </div>
-                    <button>{'>'}</button>
-                    <button>{'<'}</button>
+            <div className="row">
+                <div className="col-sm-10">
+                    <Input {...this.state} />
                 </div>
-            </Wrapper>
+                <div className="col-sm-1 text-center pr-0">
+                    <div>&nbsp;</div>
+                    <button className="btn btn-md btn-secondary w-100">{'<'}</button>
+                </div>
+                <div className="col-sm-1 text-center pr-0">
+                    <div>&nbsp;</div>
+                    <button className="btn btn-md btn-secondary w-100">{'>'}</button>
+                </div>
+            </div>
         )
     }
 }
