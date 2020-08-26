@@ -29,7 +29,7 @@ namespace Anbargol_React.Controllers
             {
                 color.Add(new Controls()
                 {
-                    Id = Convert.ToInt32(r["id"]),
+                    Value = Convert.ToInt32(r["id"]),
                     Name = r["name"].ToString()
                 });
             }
@@ -39,7 +39,7 @@ namespace Anbargol_React.Controllers
             {
                 format.Add(new Controls()
                 {
-                    Id = Convert.ToInt32(r["id"]),
+                    Value = Convert.ToInt32(r["id"]),
                     Name = r["name"].ToString()
                 });
             }
@@ -49,7 +49,7 @@ namespace Anbargol_React.Controllers
             {
                 customer.Add(new Controls()
                 {
-                    Id = Convert.ToInt32(r["id"]),
+                    Value = Convert.ToInt32(r["id"]),
                     Name = r["name"].ToString()
                 });
             }
@@ -59,7 +59,7 @@ namespace Anbargol_React.Controllers
             {
                 company.Add(new Controls()
                 {
-                    Id = Convert.ToInt32(r["id"]),
+                    Value = Convert.ToInt32(r["id"]),
                     Name = r["name"].ToString()
                 });
             }
@@ -69,7 +69,7 @@ namespace Anbargol_React.Controllers
             {
                 colorType.Add(new Controls()
                 {
-                    Id = Convert.ToInt32(r["id"]),
+                    Value = Convert.ToInt32(r["id"]),
                     Name = r["name"].ToString()
                 });
             }
@@ -88,6 +88,6 @@ namespace Anbargol_React.Controllers
 
 public class Controls
 {
-    public int Id { get; set; }
+    public int Value { get; set; }
     public string Name { get; set; }
 }

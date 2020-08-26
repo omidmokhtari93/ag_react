@@ -10,8 +10,8 @@ import Buttons from '../../../UI/Buttons/Button';
 import { ButtonActivation } from '../../../UI/Buttons/ButtonActivation';
 import FlowerInformation from '../../../Shared/FlowerInformation/FlowerInformation';
 import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
-import { connect } from 'react-redux'
-
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 class AddFlowerForms extends Component {
     state = {
         inputs: {
@@ -90,6 +90,9 @@ class AddFlowerForms extends Component {
                     column="2"
                 />
                 <Buttons {...this.state.buttons} />
+                <div className="text-center my-2">
+                    <button className="btn btn-md btn-primary" onClick={() => this.props.history.push('/additems')}>ثبت آیتم ها</button>
+                </div>
                 <Table {...this.state.table} />
             </Wrapper>
         )
@@ -101,4 +104,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(AddFlowerForms);
+export default connect(mapStateToProps)(withRouter(AddFlowerForms));
