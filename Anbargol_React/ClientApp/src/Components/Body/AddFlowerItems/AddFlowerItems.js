@@ -12,6 +12,7 @@ import FlowerInformation from '../../../Shared/FlowerInformation/FlowerInformati
 import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import { connect } from 'react-redux'
 import DropDownControl from '../../../UI/DropDowns/DropDownControl';
+import { withRouter } from 'react-router-dom'
 
 class AddFlowerItems extends Component {
     state = {
@@ -60,6 +61,11 @@ class AddFlowerItems extends Component {
             handleChange: (type) => this.handleButtonClick(type)
         }
     }
+    componentDidMount() {
+        if (this.props.flower_id == 0) {
+            this.props.history.replace('/error')
+        }
+    }
 
     handleTableButtonsClick = (key, id) => {
         console.log(key, id)
@@ -82,7 +88,7 @@ class AddFlowerItems extends Component {
             <Wrapper>
                 <ComponentsHeader>ثبت آیتم ها</ComponentsHeader>
                 <FlowerInformation flowerId={this.props.flower_id} />
-                <div style={{paddingLeft : '20rem'}}>
+                <div style={{ paddingLeft: '20rem' }}>
                     <DropDownControl />
                 </div>
                 <FormBuilder
@@ -102,4 +108,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(AddFlowerItems);
+export default connect(mapStateToProps, null)(withRouter(AddFlowerItems));

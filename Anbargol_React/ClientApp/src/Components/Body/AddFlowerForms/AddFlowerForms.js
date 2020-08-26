@@ -63,6 +63,12 @@ class AddFlowerForms extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.flower_id == 0) {
+            this.props.history.replace('/error')
+        }
+    }
+
     handleTableButtonsClick = (key, id) => {
         console.log(key, id)
     }
@@ -91,7 +97,8 @@ class AddFlowerForms extends Component {
                 />
                 <Buttons {...this.state.buttons} />
                 <div className="text-center my-2">
-                    <button className="btn btn-md btn-primary" onClick={() => this.props.history.push('/additems')}>ثبت آیتم ها</button>
+                    <button className="btn btn-md btn-primary"
+                        onClick={() => this.props.history.push('/additems')}>ثبت آیتم ها</button>
                 </div>
                 <Table {...this.state.table} />
             </Wrapper>

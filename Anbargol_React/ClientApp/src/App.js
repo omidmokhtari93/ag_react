@@ -17,6 +17,7 @@ export default class App extends Component {
           <Route path="/addforms" exact render={() => <AddFlowerForms />} />
           <Route path="/additems" exact render={() => <AddFlowerItems />} />
           <Route path ="/" exact render={() => <ErrorPage/>} />
+          <Route path ="/error" render={() => <ErrorPage/>} />
         </div>
       </Wrapper>
     );
