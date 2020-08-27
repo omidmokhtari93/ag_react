@@ -86,7 +86,7 @@ class Input extends Component {
                         onChange={(e) => this.props.handleChange(e.target.name, e.target.value)}
                         value={this.props.value}
                         name={this.props.name}>
-                        <option value="">انتخاب کنید</option>
+                        {/* <option value="">انتخاب کنید</option> */}
                         {this.createOptions()}
                     </select>
                 </div>)

@@ -24,7 +24,18 @@ class Table extends Component {
         this.gotoPage(1)
     }
 
+    componentWillUpdate() {
+        // http.get(this.props.url).then(x => {
+        //     this.setState({ body: [...x.data.rows], allPages: x.data.pagesCount, loading: false })
+        // })
+    }
+
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProps', this.props.url)
+    }
+
     fetchData = (currentPage, key) => {
+        console.log(this.props.url, ' IN TABLE')
         this.setState({ loading: true })
         let allowPagination = (this.props.rowsInPage > 0 && this.props.allowPagination);
         http.get(this.props.url, {

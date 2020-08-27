@@ -7,4 +7,4 @@ export const TableFormsBodies = ['formName', 'count', 'enterDate', 'arrangeType'
 
 
 export const TableItemsHeaders = ['نام آیتم', 'تعداد آیتم در برگ', 'تعداد لنت', 'توضیحات']
-export const TableItemsBodies = ['', '', '', '']
+export const TableItemsBodies = ['name', 'itemInSheet', 'lentInSheet', 'comment']

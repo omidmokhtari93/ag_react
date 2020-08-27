@@ -44,7 +44,11 @@ namespace Anbargol_React.Controllers.Items.Tables
                 });
             }
             con.Flower.Close();
-            return Json(list);
+            return Json(new
+            {
+                rows = list,
+                pagesCount = 1
+            });
         }
     }
 }

@@ -17,7 +17,7 @@ import http from 'axios';
 class AddFlowerItems extends Component {
     state = {
         inputs: {
-            formNumber: { value: '', required: true, touched: false, type: inputType.control_select, label: "شماره فرم", options: [{ name: 'فرم 4', value: 1 }, { name: 'فرم 6', value: 5 }] },
+            formNumber: { value: '', required: true, touched: false, type: inputType.control_select, label: "شماره فرم", options: [] },
             item: { value: '', required: true, touched: false, type: inputType.select, label: "نام آیتم", options: [{ name: 'سرویسی', value: 1 }] },
             itemInSheet: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد آیتم در برگ" },
             lentOfItem: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد لنت" },
@@ -63,13 +63,13 @@ class AddFlowerItems extends Component {
     }
     componentDidMount() {
         http.get('/api/GetFlowerForms', { params: { flowerId: this.props.flower_id } }).then(x => {
-            let state = { ...this.state.inputs }
-            state.formNumber.options = [...x.data.rows];
+            var data = x.data.rows;
+            const rows = data.map(el => { return { name: el.formName, value: el.id } })
+            let state = { ...this.state }
+            state.inputs.formNumber.options = [...rows];
+            state.table.url = state.table.url + '?formId=' + data[0].id;
             this.setState({ ...state });
         })
-        // if (this.props.flower_id == 0) {
-        //     this.props.history.replace('/error')
-        // }
     }
 
     handleSelectChange = e => {
@@ -93,6 +93,7 @@ class AddFlowerItems extends Component {
     }
 
     render() {
+        console.log(this.state.table.url , ' IN ADD FlOWER')
         return (
             <Wrapper>
                 <ComponentsHeader>ثبت آیتم ها</ComponentsHeader>
@@ -103,7 +104,7 @@ class AddFlowerItems extends Component {
                     column="3"
                 />
                 <Buttons {...this.state.buttons} />
-                {/* <Table {...this.state.table} /> */}
+                <Table {...this.state.table} />
             </Wrapper>
         )
     }

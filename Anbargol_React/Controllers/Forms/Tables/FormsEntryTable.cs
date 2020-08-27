@@ -52,5 +52,37 @@ namespace Anbargol_React.Controllers.Forms.Tables
                 pagesCount = 1
             });
         }
+
+
+        [HttpGet("/api/GetOneForm")]
+        public IActionResult GetOneForm(int formId)
+        {
+            con.Flower.Open();
+            var form = new FormsClass();
+            var cmd = new SqlCommand("SELECT flower_forms_entry.form_number, " +
+                                     "arrange_type.arrange_type, flower_dimensions.flow_dimension, " +
+                                     "flower_forms_entry.sheetcount, flower_forms_entry.mark_type, " +
+                                     "flower_forms_entry.comment, flower_forms_entry.id, " +
+                                     "flower_forms_entry.flower_id, flower_forms_entry.last_enter_date " +
+                                     "FROM flower_forms_entry INNER JOIN arrange_type " +
+                                     " ON flower_forms_entry.arrange_type = arrange_type.arrange_id " +
+                                     "INNER JOIN flower_dimensions ON flower_forms_entry.dimension = flower_dimensions.dimension_id " +
+                                     "WHERE(flower_forms_entry.id = " + formId + ") " +
+                                     "ORDER BY flower_forms_entry.form_number", con.Flower);
+            var rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                form.Id = Convert.ToInt32(rd["id"]);
+                form.FormName = rd["form_number"].ToString();
+                form.ArrangeType = rd["arrange_type"].ToString();
+                form.Dimension = rd["flow_dimension"].ToString();
+                form.Count = Convert.ToInt32(rd["sheetcount"]);
+                form.Mark = rd["mark_type"].ToString();
+                form.Comment = rd["comment"].ToString();
+                form.EnterDate = rd["last_enter_date"].ToString();
+            }
+            con.Flower.Close();
+            return Json(form);
+        }
     }
 }
