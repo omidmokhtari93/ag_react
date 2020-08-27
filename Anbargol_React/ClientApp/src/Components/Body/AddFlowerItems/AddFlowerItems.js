@@ -11,8 +11,8 @@ import { ButtonActivation } from '../../../UI/Buttons/ButtonActivation';
 import FlowerInformation from '../../../Shared/FlowerInformation/FlowerInformation';
 import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import { connect } from 'react-redux'
-import DropDownControl from '../../../UI/DropDowns/DropDownControl';
 import { withRouter } from 'react-router-dom'
+import http from 'axios';
 
 class AddFlowerItems extends Component {
     state = {
@@ -62,6 +62,11 @@ class AddFlowerItems extends Component {
         }
     }
     componentDidMount() {
+        http.get('/api/GetFlowerForms', { params: { flowerId: this.props.flower_id } }).then(x => {
+            let state = { ...this.state.inputs }
+            state.formNumber.options = [...x.data.rows];
+            this.setState({ ...state });
+        })
         // if (this.props.flower_id == 0) {
         //     this.props.history.replace('/error')
         // }
