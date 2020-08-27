@@ -10,7 +10,8 @@
 .react-input .message {
     color: red;
     font-size: 9pt;
-} 
+}
+
 .labels-area {
     display: flex !important;
     justify-content: space-between !important;

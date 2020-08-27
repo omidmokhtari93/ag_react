@@ -17,6 +17,7 @@ import { withRouter } from 'react-router-dom'
 class AddFlowerItems extends Component {
     state = {
         inputs: {
+            formNumber: { value: '', required: true, touched: false, type: inputType.control_select, label: "شماره فرم", options: [{ name: 'فرم 4', value: 1 }, { name: 'فرم 6', value: 5 }] },
             item: { value: '', required: true, touched: false, type: inputType.select, label: "نام آیتم", options: [{ name: 'سرویسی', value: 1 }] },
             itemInSheet: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد آیتم در برگ" },
             lentOfItem: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد لنت" },
@@ -36,7 +37,6 @@ class AddFlowerItems extends Component {
             },
             tableClick: (key, id) => this.handleTableButtonsClick(key, id)
         },
-
         buttons: {
             elements: {
                 [buttonTypes.submit]: {
@@ -62,9 +62,13 @@ class AddFlowerItems extends Component {
         }
     }
     componentDidMount() {
-        if (this.props.flower_id == 0) {
-            this.props.history.replace('/error')
-        }
+        // if (this.props.flower_id == 0) {
+        //     this.props.history.replace('/error')
+        // }
+    }
+
+    handleSelectChange = e => {
+
     }
 
     handleTableButtonsClick = (key, id) => {
@@ -88,13 +92,10 @@ class AddFlowerItems extends Component {
             <Wrapper>
                 <ComponentsHeader>ثبت آیتم ها</ComponentsHeader>
                 <FlowerInformation flowerId={this.props.flower_id} />
-                <div style={{ paddingLeft: '20rem' }}>
-                    <DropDownControl />
-                </div>
                 <FormBuilder
                     inputs={this.state.inputs}
                     handleChange={this.handleChange}
-                    column="4"
+                    column="3"
                 />
                 <Buttons {...this.state.buttons} />
                 {/* <Table {...this.state.table} /> */}

@@ -1,60 +1,113 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Input.module.css';
 import * as inputTypes from '../../Shared/inputTypes';
 import DatePickerWrapper from '../DatePicker/DatePickerWrapper';
 import SearchBoxNoRedux from '../SearchBox/SearchBox_NonRedux';
 
-const Input = props => {
-    const attr = {
-        defaultValue: props.value,
-        type: props.type,
+class Input extends Component {
+    ref = React.createRef();
+
+    attr = {
+        defaultValue: this.props.value,
+        type: this.props.type,
         className: "form-control form-control-md",
-        name: props.name,
+        name: this.props.name,
     }
-    let createInput = e => {
-        switch (props.type) {
-            case inputTypes.text:
-                return <input {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
-            case inputTypes.number:
-                return <input {...attr} type={inputTypes.number} style={{ textAlign: 'center' }}
-                    onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
-            case inputTypes.select:
-                return <select {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)}>
-                    <option value="">انتخاب کنید</option>
-                    {props.options &&
-                        props.options.map((op, idx) =>
-                            <option key={idx} value={op.value}>
-                                {op.name}
-                            </option>)}
-                </select>
-            case inputTypes.textarea:
-                return <textarea rows={props.rows ? props.rows : 1} {...attr}
-                    onChange={(e) => props.handleChange(e.target.name, e.target.value)}></textarea>
-            case inputTypes.file:
-                return (<input style={{ padding: '3px' }} className="form-control form-control-md"
-                    type="file" defaultValue={attr.value} type={attr.type}
-                    onChange={(e) => props.handleChange(e.target.name, e.target.value)} />)
-            case inputTypes.date:
-                return <DatePickerWrapper name={props.name} handleChange={(name, value) => props.handleChange(name, value)} />
-            case inputTypes.search:
-                return <SearchBoxNoRedux
-                    {...props}
-                    handleResponse={(e) => props.handleChange(props.name, e.id)}
-                />
-            default:
-                return <input {...attr} onChange={(e) => props.handleChange(e.target.name, e.target.value)} />
+
+    componentDidMount() {
+        if (this.props.type == inputTypes.control_select) {
+            this.setState({ element: document.getElementsByName(this.props.name)[0] })
         }
     }
 
-    return (
-        <div className="react-input mb-3">
-            <div className="labels-area">
-                <div className="label">{props.label}</div>
-                <div className="message">{props.touched && (props.value == '') && props.required && '* فیلد مورد نیاز *'}</div>
+    handleButtonClick = action => {
+        let e = this.ref.current;
+        if (action == 'inc') {
+            if (e.selectedIndex < e.options.length - 1) {
+                e.selectedIndex = e.selectedIndex + 1
+            }
+        } else {
+            if (e.selectedIndex > 0) {
+                e.selectedIndex = e.selectedIndex - 1
+            }
+        }
+        this.props.handleChange(e.name, e.value)
+    }
+    createOptions = () => {
+        let options = null;
+        this.props.options &&
+            (options = this.props.options.map((op, idx) => <option key={idx} value={op.value}>{op.name}</option>))
+        return options;
+    }
+
+    createInput = e => {
+        switch (this.props.type) {
+            //////////////////////////////////////////////////////////TEXT/////////////////////////////////////////////////////////
+            case inputTypes.text:
+                return <input {...this.attr} onChange={(e) => this.props.handleChange(e.target.name, e.target.value)} />
+            ////////////////////////////////////////////////////////NUMBER/////////////////////////////////////////////////////////
+            case inputTypes.number:
+                return <input {...this.attr} type={inputTypes.number} style={{ textAlign: 'center' }}
+                    onChange={(e) => this.props.handleChange(e.target.name, e.target.value)} />
+            ///////////////////////////////////////////////////////SELECT/////////////////////////////////////////////////////////
+            case inputTypes.select:
+                return (<select {...this.attr} onChange={(e) => this.props.handleChange(e.target.name, e.target.value)}>
+                    <option value="">انتخاب کنید</option>
+                    {this.createOptions()}
+                </select>)
+            ////////////////////////////////////////////////////////TEXT AREA//////////////////////////////////////////////////////
+            case inputTypes.textarea:
+                return <textarea rows={this.props.rows ? this.props.rows : 1} {...this.attr}
+                    onChange={(e) => this.props.handleChange(e.target.name, e.target.value)}></textarea>
+            /////////////////////////////////////////////////////////FILE/////////////////////////////////////////////////////////
+            case inputTypes.file:
+                return (<input style={{ padding: '3px' }} className="form-control form-control-md"
+                    type="file" defaultValue={this.attr.value} type={this.attr.type}
+                    onChange={(e) => this.props.handleChange(e.target.name, e.target.value)} />)
+            ////////////////////////////////////////////////////////////DATE////////////////////////////////////////////////////////////
+            case inputTypes.date:
+                return <DatePickerWrapper name={this.props.name} handleChange={(name, value) => this.props.handleChange(name, value)} />
+            ////////////////////////////////////////////////////////////SEARCH/////////////////////////////////////////////////////////
+            case inputTypes.search:
+                return <SearchBoxNoRedux
+                    {...this.props}
+                    handleResponse={(e) => this.props.handleChange(this.props.name, e.id)}
+                />
+            ////////////////////////////////////////////////////////////CONTROL_SELECT//////////////////////////////////////////////////
+            case inputTypes.control_select:
+                return (<div className="input-group mb-3 ltr">
+                    <div className="input-group-prepend">
+                        <button className="input-group-text"
+                            onClick={() => this.handleButtonClick('dec')}>{'<'}</button>
+                        <button className="input-group-text"
+                            onClick={() => this.handleButtonClick('inc')}>{'>'}</button>
+                    </div>
+                    <select ref={this.ref} className="form-control form-control-md rtl"
+                        onChange={(e) => this.props.handleChange(e.target.name, e.target.value)}
+                        value={this.props.value}
+                        name={this.props.name}>
+                        <option value="">انتخاب کنید</option>
+                        {this.createOptions()}
+                    </select>
+                </div>)
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            default:
+                return <input {...this.attr} onChange={(e) => this.props.handleChange(e.target.name, e.target.value)} />
+        }
+    }
+    render() {
+        return (
+            <div className="react-input mb-3">
+                <div className="labels-area">
+                    <div className="label">{this.props.label}</div>
+                    <div className="message">{this.props.touched && (this.props.value == '') && this.props.required && '* فیلد مورد نیاز *'}</div>
+                </div>
+                {this.createInput()}
             </div>
-            {createInput()}
-        </div>
-    )
+        )
+    }
+
+
 }
 
 export default Input;
