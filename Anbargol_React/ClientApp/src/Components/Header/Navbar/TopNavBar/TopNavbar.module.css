@@ -28,6 +28,7 @@
 @media (max-width: 705px) {
     #navigationBar {
         display: none;
+        width: -webkit-fill-available;
     }
     #top-navbar {
         padding-left: 50px !important;

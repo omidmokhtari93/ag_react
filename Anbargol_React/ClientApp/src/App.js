@@ -12,7 +12,7 @@ export default class App extends Component {
     return (
       <Wrapper>
         <Navbar />
-        <div className="container sans p-4 border">
+        <div className="container sans p-4 border mt-3">
           <Switch>
             <Route path="/addnew" render={() => <AddNewFlower />} />
             <Route path="/addforms/:flowerId" exact render={() => <AddFlowerForms />} />
