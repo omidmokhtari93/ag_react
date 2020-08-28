@@ -28,7 +28,7 @@ class AddNewFlower extends Component {
             company: { value: '', required: true, touched: false, type: inputType.select, label: "شرکت", options: [] },
             enterDate: { value: '', required: true, touched: true, type: inputType.date, label: "تاریخ ورود" },
             comment: { value: '', required: false, touched: false, type: inputType.textarea, label: "توضیحات" },
-            imageFile: { value: '', required: false, touched: false, type: inputType.file, label: "تصویر گل" },
+            imageFile: { value: null, required: false, touched: false, type: inputType.file, label: "تصویر گل" },
         },
         table: {
             creationData: {
@@ -44,6 +44,7 @@ class AddNewFlower extends Component {
                 sabtForm: 'ثبت چیدمان',
                 edit: 'ویرایش'
             },
+            editData: [],
             tableClick: (key, gol) => this.handleTableButtonsClick(key, gol)
         },
         buttons: {
@@ -90,13 +91,26 @@ class AddNewFlower extends Component {
     }
 
     handleTableButtonsClick = (key, gol) => {
-        console.log(gol)
-        if (key == 'sabtForm') {
-            this.props.history.push('/addforms/' + url.enc(gol.id))
+        switch (key) {
+            case "sabtForm":
+                this.props.history.push('/addforms/' + url.enc(gol.id));
+            case "edit":
+                this.fillInputsOnEdit(gol);
         }
     }
 
+    fillInputsOnEdit = gol => {
+        let st = { ...this.state };
+        st.inputs.name.value = gol.golName;
+        st.inputs.code.value = gol.code;
+        st.inputs.color.value = gol.color;
+        this.setState({ ...st }, () => {
+            console.log(gol)
+        })
+    }
+
     handleChange = (name, value) => {
+        console.log(name, value)
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
@@ -110,8 +124,7 @@ class AddNewFlower extends Component {
             case buttonTypes.cancel:
                 this.setState({ ...visibleButton(elements, buttonTypes.submit) })
             case buttonTypes.submit:
-
-
+                console.log(this.state.inputs)
         }
     }
 
