@@ -14,6 +14,7 @@ import { visibleButton } from '../../../UI/Buttons/ButtonActivation';
 import http from 'axios';
 import * as actions from '../../../Store/Actions/StoreFlowerIdActions';
 import { withRouter } from 'react-router-dom';
+import url from '../../../Shared/UrlIcryptor';
 
 class AddNewFlower extends Component {
     state = {
@@ -90,8 +91,7 @@ class AddNewFlower extends Component {
 
     handleTableButtonsClick = (key, id) => {
         if (key == 'sabtForm') {
-            this.props.storeFlowerId(id)
-            this.props.history.push('/addforms')
+            this.props.history.push('/addforms/' + url.enc(id))
         }
     }
 

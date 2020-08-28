@@ -14,7 +14,7 @@ class Navbar extends Component {
             url: "/api/SearchGol",
             reqParam: ['name', 'code'], //request parameters
             resParam: ['golName', 'format', 'color', 'colorType', 'code'], //response parameters
-            id: "Id", //this identity related choosen item in dropdown
+            id: "id", //this identity related choosen item in dropdown
             width: "25",
             placeholder: "جستجوی سریع گل",
             handleResponse: (res) => this.handleSearch(res), // return an object contain Flower Name and Flower Id

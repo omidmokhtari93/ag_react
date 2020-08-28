@@ -48,7 +48,9 @@ class FlowerInformation extends Component {
                 {!this.state.loading
                     ? (<Wrapper>
                         <label>نام گل : <span>{this.state.name}</span></label>
-                        <label>کد : <span>{this.state.code}</span></label>
+                        <label style={{ direction: 'ltr' }}>
+                            <span style={{ fontFamily: 'Tahoma' }}>{this.state.code}</span> : کد
+                            </label>
                         <label>رنگ : <span>{this.state.color}</span></label>
                         <label>نوع رنگ : <span>{this.state.colorType}</span></label>
                         <label>قالب : <span>{this.state.format}</span></label>

@@ -17,7 +17,8 @@ class Table extends Component {
         },
         allPages: 0,
         currentPage: 1,
-        keyword: ""
+        keyword: "",
+        url: this.props.url
     }
 
     componentDidMount() {
@@ -25,28 +26,28 @@ class Table extends Component {
     }
 
     componentWillUpdate() {
-        // http.get(this.props.url).then(x => {
-        //     this.setState({ body: [...x.data.rows], allPages: x.data.pagesCount, loading: false })
-        // })
+
     }
 
-    componentWillReceiveProps() {
-        console.log('componentWillReceiveProps', this.props.url)
+    componentWillReceiveProps(nextProps) {
+        this.setState({ url: nextProps.url }, () => {
+            this.gotoPage(1)
+        })
     }
 
     fetchData = (currentPage, key) => {
-        console.log(this.props.url, ' IN TABLE')
         this.setState({ loading: true })
         let allowPagination = (this.props.rowsInPage > 0 && this.props.allowPagination);
-        http.get(this.props.url, {
-            params: {
-                key: key,
-                rowsInpage: allowPagination ? this.props.rowsInPage : 0,
-                pageNumber: currentPage
-            }
-        }).then(x => {
-            this.setState({ body: [...x.data.rows], allPages: x.data.pagesCount, loading: false })
-        })
+        this.state.url != "" &&
+            http.get(this.state.url, {
+                params: {
+                    key: key,
+                    rowsInpage: allowPagination ? this.props.rowsInPage : 0,
+                    pageNumber: currentPage
+                }
+            }).then(x => {
+                this.setState({ body: [...x.data.rows], allPages: x.data.pagesCount, loading: false })
+            })
     }
 
     createBody = e => {
@@ -67,7 +68,7 @@ class Table extends Component {
         return tableBody;
     }
 
-    gotoPage = page => {
+    gotoPage = (page) => {
         this.setState({ currentPage: page, keyword: "" })
         this.fetchData(page, '')
     }

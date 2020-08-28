@@ -12,6 +12,8 @@ import FlowerInformation from '../../../Shared/FlowerInformation/FlowerInformati
 import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import url from '../../../Shared/UrlIcryptor';
+
 class AddFlowerForms extends Component {
     state = {
         inputs: {
@@ -28,7 +30,7 @@ class AddFlowerForms extends Component {
                 header: [...table.TableFormsHeaders],
                 body: [...table.TableFormsBodies],
             },
-            url: "/api/GetFlowerForms?flowerId=" + this.props.flower_id,
+            url: "/api/GetFlowerForms?flowerId=" + url.dec(this.props.match.params.flowerId),
             allowPagination: false,
             allowSearch: false,
             buttons: {
@@ -60,13 +62,11 @@ class AddFlowerForms extends Component {
                 }
             },
             handleChange: (type) => this.handleButtonClick(type)
-        }
+        },
+        flowerId: url.dec(this.props.match.params.flowerId)
     }
 
     componentDidMount() {
-        if (this.props.flower_id == 0) {
-            this.props.history.replace('/error')
-        }
     }
 
     handleTableButtonsClick = (key, id) => {
@@ -89,7 +89,7 @@ class AddFlowerForms extends Component {
         return (
             <Wrapper>
                 <ComponentsHeader>ثبت فرم ها</ComponentsHeader>
-                <FlowerInformation flowerId={this.props.flower_id} />
+                <FlowerInformation flowerId={this.state.flowerId} />
                 <FormBuilder
                     inputs={this.state.inputs}
                     handleChange={this.handleChange}
@@ -98,7 +98,7 @@ class AddFlowerForms extends Component {
                 <Buttons {...this.state.buttons} />
                 <div className="text-center my-2">
                     <button className="btn btn-md btn-primary"
-                        onClick={() => this.props.history.push('/additems')}>ثبت آیتم ها</button>
+                        onClick={() => this.props.history.push('/additems/' + url.enc(this.state.flowerId))}>ثبت آیتم ها</button>
                 </div>
                 <Table {...this.state.table} />
             </Wrapper>

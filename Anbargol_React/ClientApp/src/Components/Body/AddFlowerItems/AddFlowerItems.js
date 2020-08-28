@@ -13,6 +13,7 @@ import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import http from 'axios';
+import url from '../../../Shared/UrlIcryptor';
 
 class AddFlowerItems extends Component {
     state = {
@@ -28,7 +29,7 @@ class AddFlowerItems extends Component {
                 header: [...table.TableItemsHeaders],
                 body: [...table.TableItemsBodies],
             },
-            url: "/api/GetFlowerItems",
+            url: "",
             allowPagination: false,
             allowSearch: false,
             buttons: {
@@ -59,15 +60,17 @@ class AddFlowerItems extends Component {
                 }
             },
             handleChange: (type) => this.handleButtonClick(type)
-        }
+        },
+        flowerId: url.dec(this.props.match.params.flowerId)
     }
+
     componentDidMount() {
-        http.get('/api/GetFlowerForms', { params: { flowerId: this.props.flower_id } }).then(x => {
+        http.get('/api/GetFlowerForms', { params: { flowerId: this.state.flowerId } }).then(x => {
             var data = x.data.rows;
             const rows = data.map(el => { return { name: el.formName, value: el.id } })
             let state = { ...this.state }
             state.inputs.formNumber.options = [...rows];
-            state.table.url = state.table.url + '?formId=' + data[0].id;
+            state.table.url = '/api/GetFlowerItems?formId=' + data[0].id;
             this.setState({ ...state });
         })
     }
@@ -80,8 +83,10 @@ class AddFlowerItems extends Component {
         console.log(key, id)
     }
 
-    handleChange = (name, value) => {
+    handleChange = (name, value) => {  //////comes from formbuilder and inputs
+        console.log(name, value)
         let updatedState = { ...this.state }
+        updatedState.table.url = '/api/GetFlowerItems?formId=' + value;
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
         ButtonActivation(updatedState.buttons.elements, CheckInputsValidation(updatedState.inputs))
@@ -93,11 +98,10 @@ class AddFlowerItems extends Component {
     }
 
     render() {
-        console.log(this.state.table.url , ' IN ADD FlOWER')
         return (
             <Wrapper>
                 <ComponentsHeader>ثبت آیتم ها</ComponentsHeader>
-                <FlowerInformation flowerId={this.props.flower_id} />
+                <FlowerInformation flowerId={this.state.flowerId} />
                 <FormBuilder
                     inputs={this.state.inputs}
                     handleChange={this.handleChange}

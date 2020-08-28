@@ -68,7 +68,7 @@ class SearchBoxNoRedux extends Component {
         this.setState({ result: [] })
     }
 
-    createDropdown = obj => {
+    createDropdown = () => {
         const items = this.state.result.map(obj => {
             return { name: this.props.resParam.map(key => obj[key]).join(' / '), id: obj[this.props.id] }
         })
