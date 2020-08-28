@@ -25,10 +25,6 @@ class Table extends Component {
         this.gotoPage(1)
     }
 
-    componentWillUpdate() {
-
-    }
-
     componentWillReceiveProps(nextProps) {
         this.setState({ url: nextProps.url }, () => {
             this.gotoPage(1)
