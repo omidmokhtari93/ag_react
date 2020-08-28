@@ -37,7 +37,7 @@ class AddFlowerForms extends Component {
                 edit: 'ویرایش',
                 delete: 'حذف'
             },
-            tableClick: (key, id) => this.handleTableButtonsClick(key, id)
+            tableClick: (key, form) => this.handleTableButtonsClick(key, form)
         },
 
         buttons: {
@@ -69,8 +69,8 @@ class AddFlowerForms extends Component {
     componentDidMount() {
     }
 
-    handleTableButtonsClick = (key, id) => {
-        console.log(key, id)
+    handleTableButtonsClick = (key, form) => {
+        console.log(key, form)
     }
 
     handleChange = (name, value) => {

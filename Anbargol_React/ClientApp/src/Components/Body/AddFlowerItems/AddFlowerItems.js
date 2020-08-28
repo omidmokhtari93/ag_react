@@ -36,7 +36,7 @@ class AddFlowerItems extends Component {
                 edit: 'ویرایش',
                 delete: 'حذف'
             },
-            tableClick: (key, id) => this.handleTableButtonsClick(key, id)
+            tableClick: (key, item) => this.handleTableButtonsClick(key, item)
         },
         buttons: {
             elements: {
@@ -79,8 +79,8 @@ class AddFlowerItems extends Component {
 
     }
 
-    handleTableButtonsClick = (key, id) => {
-        console.log(key, id)
+    handleTableButtonsClick = (key, item) => {
+        console.log(key, item)
     }
 
     handleChange = (name, value) => {  //////comes from formbuilder and inputs

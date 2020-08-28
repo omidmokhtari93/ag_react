@@ -44,7 +44,7 @@ class AddNewFlower extends Component {
                 sabtForm: 'ثبت چیدمان',
                 edit: 'ویرایش'
             },
-            tableClick: (key, id) => this.handleTableButtonsClick(key, id)
+            tableClick: (key, gol) => this.handleTableButtonsClick(key, gol)
         },
         buttons: {
             elements: {
@@ -89,9 +89,10 @@ class AddNewFlower extends Component {
         })
     }
 
-    handleTableButtonsClick = (key, id) => {
+    handleTableButtonsClick = (key, gol) => {
+        console.log(gol)
         if (key == 'sabtForm') {
-            this.props.history.push('/addforms/' + url.enc(id))
+            this.props.history.push('/addforms/' + url.enc(gol.id))
         }
     }
 

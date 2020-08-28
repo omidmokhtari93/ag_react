@@ -58,7 +58,7 @@ class Table extends Component {
             const td = body.map((x, idx) => <td key={idx}>{this.state.body[i][x]}</td>);
             const buttons = this.props.buttons && Object.keys(this.props.buttons).map(btn => {
                 return <td key={btn + i}>
-                    <a onClick={() => this.props.tableClick(btn, this.state.body[i].id)}>
+                    <a onClick={() => this.props.tableClick(btn, this.state.body[i])}>
                         {this.props.buttons[btn]}
                     </a>
                 </td>
