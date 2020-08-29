@@ -26,7 +26,7 @@ class AddNewFlower extends Component {
             colorTypeId: { value: '', required: true, touched: false, type: inputType.select, label: "نوع رنگ", options: [] },
             customerId: { value: '', required: true, touched: false, type: inputType.select, label: "مشتری", options: [] },
             companyId: { value: '', required: true, touched: false, type: inputType.select, label: "شرکت", options: [] },
-            enterDate: { value: '', required: true, touched: false, type: inputType.date, label: "تاریخ ورود" },
+            enterDate: { value: null, required: true, touched: false, type: inputType.date, label: "تاریخ ورود" },
             comment: { value: '', required: false, touched: false, type: inputType.textarea, label: "توضیحات" },
             imageFile: { value: null, required: false, touched: false, type: inputType.file, label: "تصویر گل" },
         },
@@ -101,23 +101,32 @@ class AddNewFlower extends Component {
 
     fillInputsOnEdit = gol => {
         let st = { ...this.state };
-        Object.keys(st.inputs).map(inp => {
-            st.inputs[inp].value = gol[inp]
-            st.inputs[inp].touched = true
-        })
-        st.buttons.elements = { ...visibleButton(st.buttons.elements, [buttonTypes.cancel, buttonTypes.edit]) }
-        //console.log(CheckInputsValidation(st.inputs) ,st.inputs)
-        ButtonActivation(st.buttons.elements, CheckInputsValidation(st.inputs))
+        let date = {
+            day: parseInt(gol.enterDate.split('/')[2]),
+            month: parseInt(gol.enterDate.split('/')[1]),
+            year: parseInt(gol.enterDate.split('/')[0]),
+        };
+        gol.enterDate = JSON.stringify(date);
         this.setState({ ...st })
+        // Object.keys(st.inputs).map(inp => {
+        //     st.inputs[inp].value = gol[inp]
+        //     st.inputs[inp].touched = true
+        // })
+        // console.log(st.inputs)
+        // st.buttons.elements = { ...visibleButton(st.buttons.elements, [buttonTypes.cancel, buttonTypes.edit]) }
+        // //console.log(CheckInputsValidation(st.inputs) ,st.inputs)
+        // ButtonActivation(st.buttons.elements, CheckInputsValidation(st.inputs))
+        
     }
 
     handleChange = (name, value) => {
-        //console.log(name, value)
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
         ButtonActivation(updatedState.buttons.elements, CheckInputsValidation(updatedState.inputs))
-        this.setState({ ...updatedState });
+        this.setState({ ...updatedState }, () => {
+            //console.log(this.state.inputs.enterDate)
+        });
     }
 
     handleButtonClick = type => {
@@ -126,7 +135,7 @@ class AddNewFlower extends Component {
             case buttonTypes.cancel:
                 this.setState({ ...visibleButton(elements, buttonTypes.submit) })
             case buttonTypes.submit:
-                //console.log(this.state.inputs)
+            //console.log(this.state.inputs)
         }
     }
 

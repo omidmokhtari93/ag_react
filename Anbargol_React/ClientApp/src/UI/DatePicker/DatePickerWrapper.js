@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import './DatePickerWrapper.module.css';
-import Datepicker from 'rezvani-datepicker';
-import 'rezvani-datepicker/public/datepicker.min.css';
-
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
+import DatePicker from 'react-modern-calendar-datepicker';
 
 const DatePickerWrapper = props => {
+    let value = JSON.parse(props.value)
     return (
-        <Datepicker
-            ref={this.datePickerRef}
-            handleChange={(e) => props.handleChange(props.name, e.startDate.string)}
-            name={props.name}
-            rangePicker={false}
-            type="datepicker" />
+        <DatePicker
+            value={value}
+            onChange={(date) => props.handleChange(props.name, date)}
+            shouldHighlightWeekends
+            locale="fa"
+            inputClassName="form-control form-control-md"
+        />
     )
 }
 
