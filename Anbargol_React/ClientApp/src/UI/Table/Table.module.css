@@ -52,11 +52,11 @@
 }
 
 .react-table tr:nth-child(even) {
-    background-color: #fefefe;
+    background-color: #f3f3f3;
 }
 
 .react-table tr:nth-child(odd) {
-    background-color: #f7f6fe;
+    background-color: #ffffff;
 }
 
 .table-search {

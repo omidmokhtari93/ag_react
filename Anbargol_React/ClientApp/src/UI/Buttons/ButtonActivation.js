@@ -1,5 +1,4 @@
 import * as  buttonTypes from './ButtonTypes';
-import { object } from 'prop-types';
 
 // this property active button after validate form
 export const ButtonActivation = (buttons, formValidity) => {

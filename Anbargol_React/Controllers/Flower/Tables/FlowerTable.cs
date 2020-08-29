@@ -48,12 +48,17 @@ namespace Anbargol_React.Controllers.Flower.Tables
                     Id = Convert.ToInt32(rd["id"]),
                     GolName = rd["flower_name"].ToString(),
                     Color = rd["flow_color"].ToString(),
+                    ColorId = Convert.ToInt32(rd["flowcolor_id"]),
                     ColorType = rd["flow_colortype"].ToString(),
+                    ColorTypeId = Convert.ToInt32(rd["colortype_id"]),
                     Format = rd["flow_format"].ToString(),
+                    FormatId = Convert.ToInt32(rd["flowformat_id"]),
                     Code = rd["flower_code"].ToString(),
                     EnterDate = rd["enter_date"].ToString(),
                     Customer = rd["customer_name"].ToString(),
+                    CustomerId = Convert.ToInt32(rd["customer_id"]),
                     Company = rd["company_name"].ToString(),
+                    CompanyId = Convert.ToInt32(rd["company_id"]),
                     Comment = rd["comment"].ToString()
                 });
             }

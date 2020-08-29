@@ -19,14 +19,14 @@ import url from '../../../Shared/UrlIcryptor';
 class AddNewFlower extends Component {
     state = {
         inputs: {
-            name: { value: '', required: true, touched: false, type: inputType.text, label: "نام گل" },
+            golName: { value: '', required: true, touched: false, type: inputType.text, label: "نام گل" },
             code: { value: '', required: true, touched: false, type: inputType.text, label: "کد گل" },
-            format: { value: '', required: true, touched: false, type: inputType.select, label: "قالب", options: [] },
-            color: { value: '', required: true, touched: false, type: inputType.select, label: "رنگ", options: [] },
-            colorType: { value: '', required: true, touched: false, type: inputType.select, label: "نوع رنگ", options: [] },
-            customer: { value: '', required: true, touched: false, type: inputType.select, label: "مشتری", options: [] },
-            company: { value: '', required: true, touched: false, type: inputType.select, label: "شرکت", options: [] },
-            enterDate: { value: '', required: true, touched: true, type: inputType.date, label: "تاریخ ورود" },
+            formatId: { value: '', required: true, touched: false, type: inputType.select, label: "قالب", options: [] },
+            colorId: { value: '', required: true, touched: false, type: inputType.select, label: "رنگ", options: [] },
+            colorTypeId: { value: '', required: true, touched: false, type: inputType.select, label: "نوع رنگ", options: [] },
+            customerId: { value: '', required: true, touched: false, type: inputType.select, label: "مشتری", options: [] },
+            companyId: { value: '', required: true, touched: false, type: inputType.select, label: "شرکت", options: [] },
+            enterDate: { value: '', required: true, touched: false, type: inputType.date, label: "تاریخ ورود" },
             comment: { value: '', required: false, touched: false, type: inputType.textarea, label: "توضیحات" },
             imageFile: { value: null, required: false, touched: false, type: inputType.file, label: "تصویر گل" },
         },
@@ -37,7 +37,7 @@ class AddNewFlower extends Component {
             },
             url: "/api/GetGolTable",
             allowPagination: true,
-            rowsInPage: "10",
+            rowsInPage: "5",
             allowSearch: true,
             buttons: {
                 copy: 'کپی گل',
@@ -81,11 +81,11 @@ class AddNewFlower extends Component {
     getControls = e => {
         let inputs = { ...this.state.inputs }
         http.get('/api/GetGolControls').then(x => {
-            inputs.color.options = x.data.colors
-            inputs.colorType.options = x.data.colorTypes
-            inputs.format.options = x.data.formats
-            inputs.customer.options = x.data.customers
-            inputs.company.options = x.data.companies
+            inputs.colorId.options = x.data.colors
+            inputs.colorTypeId.options = x.data.colorTypes
+            inputs.formatId.options = x.data.formats
+            inputs.customerId.options = x.data.customers
+            inputs.companyId.options = x.data.companies
             this.setState({ ...inputs })
         })
     }
@@ -101,16 +101,18 @@ class AddNewFlower extends Component {
 
     fillInputsOnEdit = gol => {
         let st = { ...this.state };
-        st.inputs.name.value = gol.golName;
-        st.inputs.code.value = gol.code;
-        st.inputs.color.value = gol.color;
-        this.setState({ ...st }, () => {
-            console.log(gol)
+        Object.keys(st.inputs).map(inp => {
+            st.inputs[inp].value = gol[inp]
+            st.inputs[inp].touched = true
         })
+        st.buttons.elements = { ...visibleButton(st.buttons.elements, [buttonTypes.cancel, buttonTypes.edit]) }
+        //console.log(CheckInputsValidation(st.inputs) ,st.inputs)
+        ButtonActivation(st.buttons.elements, CheckInputsValidation(st.inputs))
+        this.setState({ ...st })
     }
 
     handleChange = (name, value) => {
-        console.log(name, value)
+        //console.log(name, value)
         let updatedState = { ...this.state }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
@@ -124,7 +126,7 @@ class AddNewFlower extends Component {
             case buttonTypes.cancel:
                 this.setState({ ...visibleButton(elements, buttonTypes.submit) })
             case buttonTypes.submit:
-                console.log(this.state.inputs)
+                //console.log(this.state.inputs)
         }
     }
 

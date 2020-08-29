@@ -26,9 +26,11 @@ class Table extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ url: nextProps.url }, () => {
-            this.gotoPage(1)
-        })
+        if (this.state.url != nextProps.url) {
+            this.setState({ url: nextProps.url }, () => {
+                this.gotoPage(1)
+            })
+        }
     }
 
     fetchData = (currentPage, key) => {

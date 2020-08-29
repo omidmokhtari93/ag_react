@@ -67,6 +67,7 @@ class Input extends Component {
             ////////////////////////////////////////////////////////////DATE////////////////////////////////////////////////////////////
             case inputTypes.date:
                 return <DatePickerWrapper name={this.props.name}
+                    value={this.props.value}
                     handleChange={(name, value) => this.props.handleChange(name, value)} />
             ////////////////////////////////////////////////////////////SEARCH/////////////////////////////////////////////////////////
             case inputTypes.search:
