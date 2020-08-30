@@ -78,6 +78,18 @@ class AddNewFlower extends Component {
         // this.setState({ ...visibleButton(elements, [buttonTypes.cancel, buttonTypes.edit]) })
     }
 
+    fire = e => {
+        let st = { ...this.state }
+        st.inputs.enterDate.value = {
+            year: 1394,
+            month: 5,
+            day: 2
+        }
+        this.setState({ ...st }, () => {
+            console.log(this.state.inputs.enterDate)
+        })
+    }
+
     getControls = e => {
         let inputs = { ...this.state.inputs }
         http.get('/api/GetGolControls').then(x => {
@@ -105,18 +117,18 @@ class AddNewFlower extends Component {
             day: parseInt(gol.enterDate.split('/')[2]),
             month: parseInt(gol.enterDate.split('/')[1]),
             year: parseInt(gol.enterDate.split('/')[0]),
-        };
-        gol.enterDate = JSON.stringify(date);
-        this.setState({ ...st })
-        // Object.keys(st.inputs).map(inp => {
-        //     st.inputs[inp].value = gol[inp]
-        //     st.inputs[inp].touched = true
-        // })
-        // console.log(st.inputs)
+        }
+        gol.enterDate = date;
+        Object.keys(st.inputs).map(inp => {
+            inp == 'enterDate'
+                ? (st.inputs[inp].value = { ...gol[inp] })
+                : (st.inputs[inp].value = gol[inp])
+            st.inputs[inp].touched = true
+        })
+        console.log(st.inputs)
         // st.buttons.elements = { ...visibleButton(st.buttons.elements, [buttonTypes.cancel, buttonTypes.edit]) }
-        // //console.log(CheckInputsValidation(st.inputs) ,st.inputs)
         // ButtonActivation(st.buttons.elements, CheckInputsValidation(st.inputs))
-        
+        this.setState({ ...st })
     }
 
     handleChange = (name, value) => {
@@ -142,6 +154,7 @@ class AddNewFlower extends Component {
     render() {
         return (
             <Wrapper>
+                <button onClick={this.fire}>Fire</button>
                 <ComponentsHeader>ثبت گل جدید</ComponentsHeader>
                 <FormBuilder
                     inputs={this.state.inputs}

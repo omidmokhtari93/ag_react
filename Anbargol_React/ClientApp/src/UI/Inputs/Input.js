@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import './Input.module.css';
 import * as inputTypes from '../../Shared/inputTypes';
-import DatePickerWrapper from '../DatePicker/DatePickerWrapper';
 import SearchBoxNoRedux from '../SearchBox/SearchBox_NonRedux';
+import DatePicker from 'react-modern-calendar-datepicker';
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 
 class Input extends Component {
     ref = React.createRef();
-
-    componentDidMount() {
-        if (this.props.type == inputTypes.control_select) {
-            this.setState({ element: document.getElementsByName(this.props.name)[0] })
-        }
-    }
 
     handleButtonClick = action => {
         let e = this.ref.current;
@@ -26,6 +21,7 @@ class Input extends Component {
         }
         this.props.handleChange(e.name, e.value)
     }
+
     createOptions = () => {
         let options = null;
         this.props.options &&
@@ -66,9 +62,13 @@ class Input extends Component {
                     onChange={(e) => this.props.handleChange(e.target.name, e.target.files[0])} />)
             ////////////////////////////////////////////////////////////DATE////////////////////////////////////////////////////////////
             case inputTypes.date:
-                return <DatePickerWrapper name={this.props.name}
+                return <DatePicker
                     value={this.props.value}
-                    handleChange={(name, value) => this.props.handleChange(name, value)} />
+                    onChange={(date) => this.props.handleChange(this.props.name, date)}
+                    shouldHighlightWeekends
+                    locale="fa"
+                    inputClassName="form-control form-control-md"
+                />
             ////////////////////////////////////////////////////////////SEARCH/////////////////////////////////////////////////////////
             case inputTypes.search:
                 return <SearchBoxNoRedux
@@ -95,6 +95,7 @@ class Input extends Component {
         }
     }
     render() {
+        //console.log(inputTypes.date && console.log(this.props))
         return (
             <div className="react-input mb-3">
                 <div className="labels-area">
