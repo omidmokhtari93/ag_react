@@ -98,6 +98,8 @@ class Input extends Component {
                 />
             ////////////////////////////////////////////////////////////CONTROL_SELECT//////////////////////////////////////////////////
             case inputTypes.control_select:
+                let att = {...attr}
+                !this.props.notSelected && (delete att.className);
                 return (<div className="input-group mb-3 ltr">
                     <div className="input-group-prepend">
                         <button className={"input-group-text " + (previous && 'no-drop')}
@@ -107,7 +109,7 @@ class Input extends Component {
                             disabled={next}
                             onClick={() => this.handleButtonClick('inc')}>{'>'}</button>
                     </div>
-                    <select ref={this.ref} className="form-control form-control-md rtl" {...attr}>
+                    <select ref={this.ref} className="form-control form-control-md rtl" {...att}>
                         {this.props.notSelected && <option value="">انتخاب کنید</option>}
                         {this.createOptions()}
                     </select>
