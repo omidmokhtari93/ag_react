@@ -30,6 +30,19 @@ class Input extends Component {
     }
 
     createInput = e => {
+        let next = false;
+        let previous = false;
+        let ele = this.ref.current;
+        if (this.props.type == inputTypes.control_select && ele) {
+            console.log(ele.options.length)
+            if (ele.selectedIndex == 0) {
+                previous = true;
+            }
+            if (ele.selectedIndex == (ele.length - 1)) {
+                next = true
+            }
+        }
+
         let attr = {
             value: this.props.value,
             type: this.props.type,
@@ -83,12 +96,14 @@ class Input extends Component {
                 return (<div className="input-group mb-3 ltr">
                     <div className="input-group-prepend">
                         <button className="input-group-text"
+                            disabled={previous}
                             onClick={() => this.handleButtonClick('dec')}>{'<'}</button>
                         <button className="input-group-text"
+                            disabled={next}
                             onClick={() => this.handleButtonClick('inc')}>{'>'}</button>
                     </div>
                     <select ref={this.ref} className="form-control form-control-md rtl" {...attr}>
-                        {/* <option value="">انتخاب کنید</option> */}
+                        {this.props.notSelected && <option value="">انتخاب کنید</option>}
                         {this.createOptions()}
                     </select>
                 </div>)
