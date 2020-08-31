@@ -21,7 +21,8 @@ namespace Anbargol_React.Controllers.Forms.Tables
             con.Flower.Open();
             var forms = new List<FormsClass>();
             var cmd = new SqlCommand("SELECT flower_forms_entry.form_number, " +
-                                     "arrange_type.arrange_type, flower_dimensions.flow_dimension, " +
+                                     "arrange_type.arrange_type, arrange_type.arrange_id," +
+                                     " flower_dimensions.flow_dimension,flower_dimensions.dimension_id, " +
                                      "flower_forms_entry.sheetcount, flower_forms_entry.mark_type, " +
                                      "flower_forms_entry.comment, flower_forms_entry.id, " +
                                      "flower_forms_entry.flower_id, flower_forms_entry.last_enter_date " +
@@ -38,7 +39,9 @@ namespace Anbargol_React.Controllers.Forms.Tables
                     Id = Convert.ToInt32(rd["id"]),
                     FormName = rd["form_number"].ToString(),
                     ArrangeType = rd["arrange_type"].ToString(),
+                    ArrangeTypeId = Convert.ToInt32(rd["arrange_id"]),
                     Dimension = rd["flow_dimension"].ToString(),
+                    DimensionId = Convert.ToInt32(rd["dimension_id"]),
                     Count = Convert.ToInt32(rd["sheetcount"]),
                     Mark = rd["mark_type"].ToString(),
                     Comment = rd["comment"].ToString(),

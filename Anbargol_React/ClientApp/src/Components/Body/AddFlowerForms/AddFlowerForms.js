@@ -13,13 +13,14 @@ import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import url from '../../../Shared/UrlIcryptor';
+import http from 'axios';
 
 class AddFlowerForms extends Component {
     state = {
         inputs: {
             formNumber: { value: '', required: true, touched: false, type: inputType.text, label: "شماره فرم" },
-            arrangeType: { value: '', required: true, touched: false, type: inputType.select, label: "نوع چیدمان", options: [{ name: 'سرویسی', id: 1 }, { name: 'فله', id: 2 }] },
-            dimension: { value: '', required: true, touched: false, type: inputType.select, label: "ابعاد", options: [{ name: 'سرویسی', id: 1 }, { name: 'فله', id: 2 }] },
+            arrangeType: { value: '', required: true, touched: false, type: inputType.select, label: "نوع چیدمان", options: [] },
+            dimension: { value: '', required: true, touched: false, type: inputType.select, label: "ابعاد", options: [] },
             formsCount: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد برگ" },
             mark: { value: '', required: false, touched: false, type: inputType.text, label: "نوع مارک" },
             EnterDate: { value: '', required: true, touched: false, type: inputType.date, label: "تاریخ ورود" },
@@ -67,6 +68,16 @@ class AddFlowerForms extends Component {
     }
 
     componentDidMount() {
+        this.fillElements()
+    }
+
+    fillElements = e => {
+        var st = { ...this.state.inputs }
+        http.get('/api/GetFormControls').then(x => {
+            st.dimension.options = x.data.dimensions;
+            st.arrangeType.options = x.data.arrangeType
+            this.setState({ ...st });
+        })
     }
 
     handleTableButtonsClick = (key, form) => {
