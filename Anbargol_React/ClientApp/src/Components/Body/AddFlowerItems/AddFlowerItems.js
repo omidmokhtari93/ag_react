@@ -95,7 +95,7 @@ class AddFlowerItems extends Component {
         console.log(key, item)
     }
 
-    handleChange = (name, value) => {  //////comes from formbuilder and inputs
+    handleChange = (name, value) => {  ////// comes from formbuilder and inputs
         let updatedState = { ...this.state }
         if (name == 'formNumber') {
             updatedState.table.url = '/api/GetFlowerItems?formId=' + value;
