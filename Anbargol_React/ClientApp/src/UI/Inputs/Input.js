@@ -44,10 +44,12 @@ class Input extends Component {
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        let isValid = (this.props.touched && (this.props.value != '') && this.props.required) ? 'is-valid' : '';
+        let isInvalid = (this.props.touched && (this.props.value == '') && this.props.required) ? 'is-invalid' : '';
         let attr = {
             value: this.props.value,
             type: this.props.type,
-            className: "form-control form-control-md",
+            className: "form-control form-control-md " + isValid + isInvalid,
             name: this.props.name,
             onChange: (e) => this.props.handleChange(e.target.name, e.target.value)
         }
@@ -84,7 +86,9 @@ class Input extends Component {
                     onChange={(date) => this.props.handleChange(this.props.name, date)}
                     shouldHighlightWeekends
                     locale="fa"
-                    inputClassName="form-control form-control-md bg-white"
+                    slideAnimationDuration="0.1s"
+                    calendarPopperPosition="bottom"
+                    inputClassName={"form-control form-control-md bg-white " + isValid + isInvalid}
                 />
             ////////////////////////////////////////////////////////////SEARCH/////////////////////////////////////////////////////////
             case inputTypes.search:
@@ -96,10 +100,10 @@ class Input extends Component {
             case inputTypes.control_select:
                 return (<div className="input-group mb-3 ltr">
                     <div className="input-group-prepend">
-                        <button className="input-group-text"
+                        <button className={"input-group-text " + (previous && 'no-drop')}
                             disabled={previous}
                             onClick={() => this.handleButtonClick('dec')}>{'<'}</button>
-                        <button className="input-group-text"
+                        <button className={"input-group-text " + (next && 'no-drop')}
                             disabled={next}
                             onClick={() => this.handleButtonClick('inc')}>{'>'}</button>
                     </div>
@@ -118,8 +122,7 @@ class Input extends Component {
         return (
             <div className="react-input mb-3">
                 <div className="labels-area">
-                    <div className="label">{this.props.label}</div>
-                    <div className="message">{this.props.touched && (this.props.value == '') && this.props.required && '* فیلد مورد نیاز *'}</div>
+                    {this.props.label}
                 </div>
                 {this.createInput()}
             </div>

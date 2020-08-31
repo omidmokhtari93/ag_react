@@ -25,3 +25,10 @@
     height: 38px !important;
     font-size: 1rem !important;
 }
+.input-group-prepend button:hover {
+    background-color: wheat;
+}
+
+.input-group-prepend button {
+    outline: none;
+}

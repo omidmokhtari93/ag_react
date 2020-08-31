@@ -94,3 +94,4 @@ body {
 .row {
     direction: rtl;
 }
+.no-drop {cursor: no-drop;}
