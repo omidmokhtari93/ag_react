@@ -39,7 +39,7 @@ class Navbar extends Component {
         return (
             <Wrapper>
                 <SideNavar close={this.handleShowSideBar} show={this.state.showSideBar} />
-                <nav className="sans navbar navbar-expand-sm navbar-light bg-light p-2 border-bottom" id="top-navbar">
+                <nav className="sans navbar navbar-expand-sm navbar-light p-2 border-bottom" id="top-navbar">
                     <Logo />
                     <ul className="navbar-nav pr-4" id="navigationBar">
                         <NavBarItems />
