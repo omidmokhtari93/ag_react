@@ -30,6 +30,7 @@ class Input extends Component {
     }
 
     createInput = e => {
+        ///////////////////////////////////////////this block for validation control select///////////////////////////////////
         let next = false;
         let previous = false;
         let ele = this.ref.current;
@@ -42,7 +43,7 @@ class Input extends Component {
                 next = true
             }
         }
-
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         let attr = {
             value: this.props.value,
             type: this.props.type,
