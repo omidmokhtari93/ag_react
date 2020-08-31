@@ -84,7 +84,7 @@ class Input extends Component {
                     onChange={(date) => this.props.handleChange(this.props.name, date)}
                     shouldHighlightWeekends
                     locale="fa"
-                    inputClassName="form-control form-control-md"
+                    inputClassName="form-control form-control-md bg-white"
                 />
             ////////////////////////////////////////////////////////////SEARCH/////////////////////////////////////////////////////////
             case inputTypes.search:
