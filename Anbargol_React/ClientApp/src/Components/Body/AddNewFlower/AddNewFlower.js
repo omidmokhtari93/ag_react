@@ -15,6 +15,7 @@ import http from 'axios';
 import * as actions from '../../../Store/Actions/StoreFlowerIdActions';
 import { withRouter } from 'react-router-dom';
 import url from '../../../Shared/UrlIcryptor';
+import { ResetInputs } from '../../../Shared/ResetInputs';
 
 class AddNewFlower extends Component {
     state = {
@@ -127,9 +128,15 @@ class AddNewFlower extends Component {
         const elements = { ...this.state.buttons.elements };
         switch (type) {
             case buttonTypes.cancel:
-                this.setState({ ...visibleButton(elements, buttonTypes.submit) })
-            case buttonTypes.submit:
-            
+                this.setState({
+                    ...visibleButton(elements, buttonTypes.submit),
+                    ...ResetInputs(this.state.inputs)
+                })
+            case buttonTypes.edit:
+                this.setState({
+                    ...ResetInputs(this.state.inputs),
+                    ...visibleButton(elements, buttonTypes.submit),
+                })
         }
     }
 
