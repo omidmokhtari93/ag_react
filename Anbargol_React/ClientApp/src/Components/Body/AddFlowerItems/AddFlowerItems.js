@@ -20,7 +20,7 @@ class AddFlowerItems extends Component {
     state = {
         inputs: {
             formNumber: { value: '', required: true, touched: false, type: inputType.control_select, label: "شماره فرم", options: [] },
-            item: { value: '', required: true, touched: false, type: inputType.select, label: "نام آیتم", options: [{ name: 'سرویسی', value: 1 }] },
+            item: { value: '', required: true, touched: false, type: inputType.select, label: "نام آیتم", options: [] },
             itemInSheet: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد آیتم در برگ" },
             lentOfItem: { value: '', required: true, touched: false, type: inputType.number, label: "تعداد لنت" },
             comment: { value: '', required: true, touched: false, type: inputType.text, label: "توضیحات" },
@@ -75,6 +75,15 @@ class AddFlowerItems extends Component {
             state.table.url = '/api/GetFlowerItems?formId=' + data[0].id;
             state.formId = data[0].id;
             this.setState({ ...state });
+            this.fillControls()
+        })
+    }
+
+    fillControls = e => {
+        let st = { ...this.state.inputs }
+        http.get('/api/GetItemsControls').then(x => {
+            st.item.options = x.data.items
+            this.setState({ ...st })
         })
     }
 
