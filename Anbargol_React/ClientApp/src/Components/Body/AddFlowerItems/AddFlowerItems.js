@@ -14,6 +14,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import http from 'axios';
 import url from '../../../Shared/UrlIcryptor';
+import FormInformation from '../../../Shared/FormInformation/FormInformation';
 
 class AddFlowerItems extends Component {
     state = {
@@ -61,7 +62,8 @@ class AddFlowerItems extends Component {
             },
             handleChange: (type) => this.handleButtonClick(type)
         },
-        flowerId: url.dec(this.props.match.params.flowerId)
+        flowerId: url.dec(this.props.match.params.flowerId),
+        formId: null
     }
 
     componentDidMount() {
@@ -71,6 +73,7 @@ class AddFlowerItems extends Component {
             let state = { ...this.state }
             state.inputs.formNumber.options = [...rows];
             state.table.url = '/api/GetFlowerItems?formId=' + data[0].id;
+            state.formId = data[0].id;
             this.setState({ ...state });
         })
     }
@@ -84,9 +87,11 @@ class AddFlowerItems extends Component {
     }
 
     handleChange = (name, value) => {  //////comes from formbuilder and inputs
-        console.log(name, value)
         let updatedState = { ...this.state }
-        updatedState.table.url = '/api/GetFlowerItems?formId=' + value;
+        if (name == 'formNumber') {
+            updatedState.table.url = '/api/GetFlowerItems?formId=' + value;
+            updatedState.formId = value;
+        }
         updatedState.inputs[name].value = value;
         updatedState.inputs[name].touched = true;
         ButtonActivation(updatedState.buttons.elements, CheckInputsValidation(updatedState.inputs))
@@ -102,6 +107,7 @@ class AddFlowerItems extends Component {
             <Wrapper>
                 <ComponentsHeader>ثبت آیتم ها</ComponentsHeader>
                 <FlowerInformation flowerId={this.state.flowerId} />
+                <FormInformation formId={this.state.formId} />
                 <FormBuilder
                     inputs={this.state.inputs}
                     handleChange={this.handleChange}
