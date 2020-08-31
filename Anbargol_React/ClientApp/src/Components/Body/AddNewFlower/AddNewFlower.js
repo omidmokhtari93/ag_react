@@ -20,7 +20,7 @@ class AddNewFlower extends Component {
     state = {
         inputs: {
             golName: { value: '', required: true, touched: false, type: inputType.text, label: "نام گل" },
-            code: { value: '', required: true, touched: false, type: inputType.text, label: "کد گل" },
+            code: { value: '', required: true, touched: false, type: inputType.englishText, label: "کد گل" },
             formatId: { value: '', required: true, touched: false, type: inputType.select, label: "قالب", options: [] },
             colorId: { value: '', required: true, touched: false, type: inputType.select, label: "رنگ", options: [] },
             colorTypeId: { value: '', required: true, touched: false, type: inputType.select, label: "نوع رنگ", options: [] },
@@ -74,8 +74,6 @@ class AddNewFlower extends Component {
 
     componentDidMount() {
         this.getControls();
-        // const elements = { ...this.state.buttons.elements };
-        // this.setState({ ...visibleButton(elements, [buttonTypes.cancel, buttonTypes.edit]) })
     }
 
     getControls = e => {

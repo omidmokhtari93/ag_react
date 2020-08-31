@@ -1,4 +1,5 @@
 export const text = "text";
+export const englishText = "englishText";
 export const number = "number";
 export const select = "select";
 export const textarea = "textarea";
