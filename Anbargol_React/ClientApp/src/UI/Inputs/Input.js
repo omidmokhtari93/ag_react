@@ -66,7 +66,9 @@ class Input extends Component {
             ///////////////////////////////////////////////////////SELECT//////////////////////////////////////////////////////////
             case inputTypes.select:
                 return (<select {...attr} >
-                    <option value="">انتخاب کنید</option>
+                    {(this.props.notSelected == undefined
+                        || this.props.notSelected == true)
+                        && <option value="">انتخاب کنید</option>}
                     {this.createOptions()}
                 </select>)
             ////////////////////////////////////////////////////////TEXT AREA//////////////////////////////////////////////////////
@@ -98,7 +100,7 @@ class Input extends Component {
                 />
             ////////////////////////////////////////////////////////////CONTROL_SELECT//////////////////////////////////////////////////
             case inputTypes.control_select:
-                let att = {...attr}
+                let att = { ...attr }
                 !this.props.notSelected && (delete att.className);
                 return (<div className="input-group mb-3 ltr">
                     <div className="input-group-prepend">
@@ -120,7 +122,6 @@ class Input extends Component {
         }
     }
     render() {
-        //console.log(inputTypes.date && console.log(this.props))
         return (
             <div className="react-input mb-3">
                 <div className="labels-area">
