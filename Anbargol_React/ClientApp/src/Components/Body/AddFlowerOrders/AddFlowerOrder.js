@@ -34,7 +34,7 @@ class AddFlowerOrders extends Component {
             allowSearch: false,
             buttons: {
                 edit: 'ویرایش',
-                delete: 'حذف'
+                delete: 'حذف',
             },
             tableClick: (key, item) => this.handleTableButtonsClick(key, item)
         },
@@ -61,8 +61,7 @@ class AddFlowerOrders extends Component {
             },
             handleChange: (type) => this.handleButtonClick(type)
         },
-        flowerId: url.dec(this.props.match.params.flowerId),
-        formId: null
+        flowerId: url.dec(this.props.match.params.flowerId)
     }
 
     handleChange = (name, value) => {

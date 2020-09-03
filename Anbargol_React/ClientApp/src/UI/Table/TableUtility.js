@@ -5,6 +5,9 @@ export const TableGolBodies = ['golName', 'code', 'color', 'colorType', 'format'
 export const TableFormsHeaders = ['شماره فرم', 'تعداد برگ', 'تاریخ ورود', 'نوع چیدمان', 'ابعاد', 'نوع مارک و تعداد', 'توضیحات']
 export const TableFormsBodies = ['formName', 'count', 'enterDate', 'arrangeType', 'dimension', 'mark', 'comment']
 
+export const TableFormsHistoryHeaders = ['شماره فرم' , 'تغییر' , 'زمان تغییر']
+export const TableFormsHistoryBodies = ['', '', '']
+
 
 export const TableItemsHeaders = ['نام آیتم', 'تعداد آیتم در برگ', 'تعداد لنت', 'توضیحات']
 export const TableItemsBodies = ['name', 'itemInSheet', 'lentInSheet', 'comment']

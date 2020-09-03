@@ -40,7 +40,15 @@ class AddFlowerForms extends Component {
             },
             tableClick: (key, form) => this.handleTableButtonsClick(key, form)
         },
-
+        tableHistory: {
+            creationData: {
+                header: [...table.TableFormsHistoryHeaders],
+                body: [...table.TableFormsHistoryBodies],
+            },
+            url: "/api/GetFlowerForms?flowerId=" + url.dec(this.props.match.params.flowerId),
+            allowPagination: false,
+            allowSearch: false
+        },
         buttons: {
             elements: {
                 [buttonTypes.submit]: {
@@ -91,11 +99,7 @@ class AddFlowerForms extends Component {
         ButtonActivation(updatedState.buttons.elements, CheckInputsValidation(updatedState.inputs))
         this.setState({ ...updatedState });
     }
-
-    handleButtonClick = type => {
-
-    }
-
+    
     render() {
         return (
             <Wrapper>
@@ -111,7 +115,14 @@ class AddFlowerForms extends Component {
                     <button className="btn btn-md btn-primary"
                         onClick={() => this.props.history.push('/additems/' + url.enc(this.state.flowerId))}>ثبت آیتم ها</button>
                 </div>
-                <Table {...this.state.table} />
+                <div className="row">
+                    <div className="col-md-9">
+                        <Table {...this.state.table} />
+                    </div>
+                    <div className="col-md-3">
+                        <Table {...this.state.tableHistory} />
+                    </div>
+                </div>
             </Wrapper>
         )
     }

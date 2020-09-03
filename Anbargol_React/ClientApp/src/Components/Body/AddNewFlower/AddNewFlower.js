@@ -133,6 +133,11 @@ class AddNewFlower extends Component {
                     ...ResetInputs(this.state.inputs)
                 })
             case buttonTypes.edit:
+                let formData = {};
+                Object.keys(this.state.inputs).map(inp => {
+                    formData[inp] = this.state.inputs[inp].value
+                })
+                console.log(formData)
                 this.setState({
                     ...ResetInputs(this.state.inputs),
                     ...visibleButton(elements, buttonTypes.submit),
