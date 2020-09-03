@@ -123,6 +123,10 @@ class AddFlowerItems extends Component {
                     column="3"
                 />
                 <Buttons {...this.state.buttons} />
+                <div className="text-center my-2">
+                    <button className="btn btn-md btn-primary"
+                        onClick={() => this.props.history.push('/addorders/' + url.enc(this.state.flowerId))}>ثبت سفارش</button>
+                </div>
                 <Table {...this.state.table} />
             </Wrapper>
         )
