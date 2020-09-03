@@ -112,7 +112,9 @@ class Input extends Component {
                             onClick={() => this.handleButtonClick('inc')}>{'>'}</button>
                     </div>
                     <select ref={this.ref} className="form-control form-control-md rtl" {...att}>
-                        {this.props.notSelected && <option value="">انتخاب کنید</option>}
+                        {(this.props.notSelected == undefined
+                            || this.props.notSelected == true)
+                            && <option value="">انتخاب کنید</option>}
                         {this.createOptions()}
                     </select>
                 </div>)
