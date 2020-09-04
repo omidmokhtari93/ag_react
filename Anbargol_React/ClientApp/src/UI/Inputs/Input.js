@@ -8,19 +8,13 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 class Input extends Component {
     ref = React.createRef();
 
-    handleButtonClick = action => {
-        let e = this.ref.current;
-        if (action == 'inc') {
-            if (e.selectedIndex < e.options.length - 1) {
-                e.selectedIndex = e.selectedIndex + 1
-            }
-        } else {
-            if (e.selectedIndex > 0) {
-                e.selectedIndex = e.selectedIndex - 1
-            }
-        }
-        this.props.handleChange(e.name, e.value)
-    }
+    handleButtonClick = e => {
+        let n = this.ref.current;
+        "inc" == e ? n.selectedIndex < n.options.length - 1
+            && (n.selectedIndex = n.selectedIndex + 1) : n.selectedIndex > 0
+            && (n.selectedIndex = n.selectedIndex - 1);
+        this.props.handleChange(n.name, n.value)
+    };
 
     createOptions = () => {
         let options = null;
