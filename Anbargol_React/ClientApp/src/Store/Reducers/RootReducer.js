@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import SearchBoxRedcuder from './Reducers/SearchBoxReducer';
-import StoreFlowerIdReducer from './Reducers/StoreFlowerIdReducer'
+//import SearchBoxRedcuder from './Reducers/SearchBoxReducer';
+import StoreFlowerIdReducer from './StoreFlowerIdReducer'
 
 const RootReducer = combineReducers({
     storeFlowerId: StoreFlowerIdReducer,

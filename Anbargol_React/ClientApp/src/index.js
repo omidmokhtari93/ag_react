@@ -9,7 +9,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import RootReducer from './Store/RootReducer';
+import RootReducer from './Store/Reducers/RootReducer';
 import thunk from 'redux-thunk';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
