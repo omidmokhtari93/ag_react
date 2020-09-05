@@ -68,7 +68,7 @@ class AddFlowerItems extends Component {
 
     componentDidMount() {
         http.get('/api/GetFlowerForms', { params: { flowerId: this.state.flowerId } }).then(x => {
-            if (x.data.rows.length) {
+            if (x.data.rows.length > 0) {
                 var data = x.data.rows;
                 const rows = data.map(el => { return { name: el.formName, value: el.id } })
                 let state = { ...this.state }
