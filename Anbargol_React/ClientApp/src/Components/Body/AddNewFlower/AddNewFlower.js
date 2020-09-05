@@ -14,7 +14,7 @@ import { visibleButton } from '../../../UI/Buttons/ButtonActivation';
 import http from 'axios';
 import * as actions from '../../../Store/Actions/StoreFlowerIdActions';
 import { withRouter } from 'react-router-dom';
-import url from '../../../Shared/UrlIcryptor';
+import url from '../../../Shared/url-incryptor';
 import { ResetInputs } from '../../../Shared/ResetInputs';
 
 class AddNewFlower extends Component {

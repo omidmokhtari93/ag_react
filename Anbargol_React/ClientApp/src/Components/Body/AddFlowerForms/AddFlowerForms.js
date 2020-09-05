@@ -12,7 +12,7 @@ import FlowerInformation from '../../../Shared/FlowerInformation/FlowerInformati
 import ComponentsHeader from '../../../UI/ComponentsHeader/ComponentsHeader';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import url from '../../../Shared/UrlIcryptor';
+import url from '../../../Shared/url-incryptor';
 import http from 'axios';
 
 class AddFlowerForms extends Component {

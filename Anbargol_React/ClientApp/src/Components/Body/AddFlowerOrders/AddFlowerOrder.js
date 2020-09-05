@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import http from 'axios';
-import url from '../../../Shared/UrlIcryptor';
+import url from '../../../Shared/url-incryptor';
 import * as buttonTypes from '../../../UI/Buttons/ButtonTypes';
 import * as inputType from '../../../Shared/inputTypes';
 import Table from '../../../UI/Table/Table';
