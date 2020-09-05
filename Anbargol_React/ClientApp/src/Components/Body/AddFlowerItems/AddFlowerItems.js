@@ -68,13 +68,15 @@ class AddFlowerItems extends Component {
 
     componentDidMount() {
         http.get('/api/GetFlowerForms', { params: { flowerId: this.state.flowerId } }).then(x => {
-            var data = x.data.rows;
-            const rows = data.map(el => { return { name: el.formName, value: el.id } })
-            let state = { ...this.state }
-            state.inputs.formNumber.options = [...rows];
-            state.table.url = '/api/GetFlowerItems?formId=' + data[0].id;
-            state.formId = data[0].id;
-            this.setState({ ...state });
+            if (x.data.rows.length) {
+                var data = x.data.rows;
+                const rows = data.map(el => { return { name: el.formName, value: el.id } })
+                let state = { ...this.state }
+                state.inputs.formNumber.options = [...rows];
+                state.table.url = '/api/GetFlowerItems?formId=' + data[0].id;
+                state.formId = data[0].id;
+                this.setState({ ...state });
+            }
             this.fillControls()
         })
     }
