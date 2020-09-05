@@ -5,10 +5,10 @@ import Wrapper from '../../Shared/Wrapper/Wrapper';
 
 const Loading = props => {
     return (
-        <Wrapper>
+        <React.Fragment>
             {props.show && <img src={src}
                 style={props.style ? props.style : null} />}
-        </Wrapper>
+        </React.Fragment>
     )
 }
 
