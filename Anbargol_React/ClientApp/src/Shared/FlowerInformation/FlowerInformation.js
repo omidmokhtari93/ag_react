@@ -3,7 +3,7 @@ import Wrapper from '../Wrapper/Wrapper';
 import './FlowerInformation.module.css';
 import http from 'axios';
 import Loading from '../../UI/Loading/Loading';
-
+import { isNumeric } from '../IsNumeric';
 class FlowerInformation extends Component {
     state = {
         name: '',
@@ -22,8 +22,8 @@ class FlowerInformation extends Component {
     }
 
     getData = e => {
-        if (!Number.isInteger(this.props.flowerId) ) {
-            throw new Error('DO NOT CHANGE URL PARAMETERS ..')
+        if (!isNumeric(this.props.flowerId)) {
+            throw new Error('DO NOT CHANGE URL PARAMETERS ..');
         }
         this.props.flowerId && http.get('/api/SearchGol', {
             params: {

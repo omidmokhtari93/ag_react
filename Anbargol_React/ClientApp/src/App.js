@@ -7,7 +7,7 @@ import AddFlowerItems from './Components/Body/AddFlowerItems/AddFlowerItems';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import ErrorPage from './Shared/ErrorPage/ErrorPage';
 import AddFlowerOrders from './Components/Body/AddFlowerOrders/AddFlowerOrder';
-import ErrorBoundary from './Shared/ErrorBoundary';
+import ErrorBoundary from './Shared/ErrorBoundary/ErrorBoundary';
 
 export default class App extends Component {
   render() {
