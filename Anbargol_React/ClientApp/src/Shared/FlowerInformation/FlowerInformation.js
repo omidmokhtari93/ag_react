@@ -22,6 +22,9 @@ class FlowerInformation extends Component {
     }
 
     getData = e => {
+        if (!Number.isInteger(this.props.flowerId) ) {
+            throw new Error('DO NOT CHANGE URL PARAMETERS ..')
+        }
         this.props.flowerId && http.get('/api/SearchGol', {
             params: {
                 name: '',

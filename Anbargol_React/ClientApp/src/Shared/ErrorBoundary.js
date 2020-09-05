@@ -17,15 +17,18 @@ class ErrorBoundary extends React.Component {
     if (this.state.errorInfo) {
       return (
         <React.Fragment>
-          <h1 style={{ textAlign: 'center' }}>⚠</h1>
-          <h4 style={{ textAlign: 'center' }}>
+          <h1 className="text-center">⚠</h1>
+          <h4 className="text-center mb-0">
             ...خطایی در نرم افزار رخ داده است
             <br />
             <br />
             ...لطفا با پشتیبان نرم افزار تماس بگیرید
           </h4>
-          <br />
-          <div>
+          <div className="p-4 text-center">
+            <button onClick={() => window.location.href = '/addnew'}
+              className="btn btn-primary">راه اندازی دوباره نرم افزار</button>
+          </div>
+          <div className="text-center">
             {this.state.error && this.state.error.toString()}
           </div>
         </React.Fragment>

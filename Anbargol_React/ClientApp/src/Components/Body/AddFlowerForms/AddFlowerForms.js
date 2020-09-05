@@ -45,7 +45,7 @@ class AddFlowerForms extends Component {
                 header: [...table.TableFormsHistoryHeaders],
                 body: [...table.TableFormsHistoryBodies],
             },
-            url: "/api/GetFlowerForms?flowerId=" + url.dec(this.props.match.params.flowerId),
+            url: "",
             allowPagination: false,
             allowSearch: false
         },

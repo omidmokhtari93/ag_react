@@ -1,11 +1,20 @@
 const url = {
 
     enc: (url) => {
-        return window.btoa(url);
+        try {
+            return window.btoa(url);    
+        } catch (error) {
+            throw new Error(error)
+        }
     },
 
     dec: (url) => {
-        return window.atob(url);
+        try {
+            return window.atob(url);
+        } catch (error) {
+            throw new Error(error)
+        }
+        
     }
 }
 
