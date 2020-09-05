@@ -1,37 +1,38 @@
 import React from "react";
 
 class ErrorBoundary extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { error: null, errorInfo: null };
-    }
-    
-    componentDidCatch(error, errorInfo) {
-      // Catch errors in any components below and re-render with error message
-      this.setState({
-        error: error,
-        errorInfo: errorInfo
-      })
-      // You can also log error messages to an error reporting service here
-    }
-    
-    render() {
-      if (this.state.errorInfo) {
-        // Error path
-        return (
+  constructor(props) {
+    super(props);
+    this.state = { error: null, errorInfo: null };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    this.setState({
+      error: error,
+      errorInfo: errorInfo
+    })
+  }
+
+  render() {
+    if (this.state.errorInfo) {
+      return (
+        <React.Fragment>
+          <h1 style={{ textAlign: 'center' }}>⚠</h1>
+          <h4 style={{ textAlign: 'center' }}>
+            ...خطایی در نرم افزار رخ داده است
+            <br />
+            <br />
+            ...لطفا با پشتیبان نرم افزار تماس بگیرید
+          </h4>
+          <br />
           <div>
-            <h2>خطایی در نرم افزار رخ داده است</h2>
-            <details style={{ whiteSpace: 'pre-wrap' }}>
-              {this.state.error && this.state.error.toString()}
-              <br />
-              {this.state.errorInfo.componentStack}
-            </details>
+            {this.state.error && this.state.error.toString()}
           </div>
-        );
-      }
-      // Normally, just render children
-      return this.props.children;
-    }  
+        </React.Fragment>
+      );
+    }
+    return this.props.children;
+  }
 }
 
 export default ErrorBoundary;
