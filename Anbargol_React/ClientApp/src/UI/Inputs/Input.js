@@ -45,7 +45,9 @@ class Input extends Component {
             type: this.props.type,
             className: "form-control form-control-md " + isValid + isInvalid,
             name: this.props.name,
-            onChange: (e) => this.props.handleChange(e.target.name, e.target.value)
+            onChange: this.props.type == inputTypes.select
+                ? (e) => this.props.handleChange(e.target.name, e.target.value, e.target.options[e.target.selectedIndex].text)
+                : (e) => this.props.handleChange(e.target.name, e.target.value)
         }
         switch (this.props.type) {
             //////////////////////////////////////////////////////////TEXT/////////////////////////////////////////////////////////
@@ -72,6 +74,7 @@ class Input extends Component {
             case inputTypes.file:
                 let copyAttr = { ...attr };
                 delete copyAttr.value;
+                delete copyAttr.onChange;
                 return (<input style={{ padding: '3px' }}
                     {...copyAttr}
                     onChange={(e) => this.props.handleChange(e.target.name, e.target.files[0])} />)
