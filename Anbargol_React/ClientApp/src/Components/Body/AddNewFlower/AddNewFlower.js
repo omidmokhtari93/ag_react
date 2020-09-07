@@ -99,49 +99,39 @@ class AddNewFlower extends Component {
     }
 
     fillInputsOnEdit = gol => {
-        console.log(gol)
         let st = { ...this.state };
-        let g = { ...gol };
         let date = {
-            day: parseInt(g.enterDate.split('/')[2]),
-            month: parseInt(g.enterDate.split('/')[1]),
-            year: parseInt(g.enterDate.split('/')[0]),
+            day: parseInt(gol.enterDate.split('/')[2]),
+            month: parseInt(gol.enterDate.split('/')[1]),
+            year: parseInt(gol.enterDate.split('/')[0]),
         }
-        g.enterDate = date
         st.inputs.name.value = gol.golName;
+        st.inputs.name.touched = true;
         st.inputs.code.value = gol.code;
+        st.inputs.code.touched = true;
         st.inputs.color.value = gol.colorId;
         st.inputs.color.text = gol.color;
+        st.inputs.color.touched = true;
         st.inputs.colorType.value = gol.colorTypeId;
         st.inputs.colorType.text = gol.colorType;
+        st.inputs.colorType.touched = true;
         st.inputs.format.value = gol.formatId;
         st.inputs.format.text = gol.format;
+        st.inputs.format.touched = true;
+        st.inputs.customer.value = gol.customerId;
+        st.inputs.customer.text = gol.customer;
+        st.inputs.customer.touched = true;
+        st.inputs.company.value = gol.companyId;
+        st.inputs.company.text = gol.company;
+        st.inputs.company.touched = true;
+        st.inputs.enterDate.value = date;
+        st.inputs.enterDate.touched = true;
+        st.inputs.comment.value = gol.comment;
+        st.inputs.comment.touched = true;
 
-            // code: "SF-1204"
-            // color: "طلا"
-            // colorId: 23
-            // colorType: "مایکروویو"
-            // colorTypeId: 1
-            // comment: "ارمنستان"
-            // company: "سيمين فام يکتا"
-            // companyId: 7
-            // customer: "چینی تقدیس"
-            // customerId: 10
-            // enterDate: "1399/03/31"
-            // format: "فلت"
-            // formatId: 3
-            // golName: "اوپتیما"
-            // id: 4308
-            // Object.keys(st.inputs).map(inp => {
-            //     st.inputs[inp].value = g[inp];
-            //     //st.inputs[inp].text = 
-            //     st.inputs[inp].touched = true;
-            // })
-            st.buttons.elements = { ...visibleButton(st.buttons.elements, [buttonTypes.cancel, buttonTypes.edit]) }
+        st.buttons.elements = { ...visibleButton(st.buttons.elements, [buttonTypes.cancel, buttonTypes.edit]) }
         ButtonActivation(st.buttons.elements, CheckInputsValidation(st.inputs))
-        this.setState({ ...st }, () => {
-            console.log(this.state.inputs)
-        })
+        this.setState({ ...st })
     }
 
     handleChange = (name, value, text) => {
